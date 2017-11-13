@@ -34,20 +34,79 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import ARKit
+import SceneKit
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ARSessionDelegate {
+
+    let contentUpdater = ContentUpdater()
+    @IBOutlet var sceneView: ARSCNView!
+    var session: ARSession {
+        return sceneView.session
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        sceneView.delegate = contentUpdater
+        sceneView.session.delegate = self
+        sceneView.automaticallyUpdatesLighting = true
     }
 
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIApplication.shared.isIdleTimerDisabled = true
+        
+        resetTracking()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        session.pause()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-
+    
+    // MARK: - ARSessionDelegate
+    
+    func session(_ session: ARSession, didFailWithError error: Error) {
+        guard error is ARError else { return }
+        
+        let errorWithInfo = error as NSError
+        let messages = [
+            errorWithInfo.localizedDescription,
+            errorWithInfo.localizedFailureReason,
+            errorWithInfo.localizedRecoverySuggestion
+        ]
+        let errorMessage = messages.flatMap({ $0 }).joined(separator: "\n")
+        
+        DispatchQueue.main.async {
+            print("The AR session failed. ::" + errorMessage)
+        }
+    }
+    
+    func sessionWasInterrupted(_ session: ARSession) {
+    }
+    
+    func sessionInterruptionEnded(_ session: ARSession) {
+        DispatchQueue.main.async {
+            self.resetTracking()
+        }
+    }
+    
+    /// - Tag: ARFaceTrackingSetup
+    func resetTracking() {
+        guard ARFaceTrackingConfiguration.isSupported else { return }
+        let configuration = ARFaceTrackingConfiguration()
+        configuration.isLightEstimationEnabled = true
+        session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+    }
 }
 

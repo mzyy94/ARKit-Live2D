@@ -14,6 +14,7 @@
 		9E3322141FBA0B2A00E186AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E3322121FBA0B2A00E186AF /* LaunchScreen.storyboard */; };
 		9E33221F1FBA0B2A00E186AF /* ARKit_Live2DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E33221E1FBA0B2A00E186AF /* ARKit_Live2DTests.swift */; };
 		9E33222A1FBA0B2A00E186AF /* ARKit_Live2DUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322291FBA0B2A00E186AF /* ARKit_Live2DUITests.swift */; };
+		9E3322381FBA0CAE00E186AF /* ContentUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322371FBA0CAE00E186AF /* ContentUpdater.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		9E3322251FBA0B2A00E186AF /* ARKit-Live2DUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ARKit-Live2DUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E3322291FBA0B2A00E186AF /* ARKit_Live2DUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARKit_Live2DUITests.swift; sourceTree = "<group>"; };
 		9E33222B1FBA0B2A00E186AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E3322371FBA0CAE00E186AF /* ContentUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentUpdater.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				9E3322091FBA0B2A00E186AF /* AppDelegate.swift */,
 				9E33220B1FBA0B2A00E186AF /* ViewController.swift */,
+				9E3322371FBA0CAE00E186AF /* ContentUpdater.swift */,
 				9E33220D1FBA0B2A00E186AF /* Main.storyboard */,
 				9E3322101FBA0B2A00E186AF /* Assets.xcassets */,
 				9E3322121FBA0B2A00E186AF /* LaunchScreen.storyboard */,
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E3322381FBA0CAE00E186AF /* ContentUpdater.swift in Sources */,
 				9E33220C1FBA0B2A00E186AF /* ViewController.swift in Sources */,
 				9E33220A1FBA0B2A00E186AF /* AppDelegate.swift in Sources */,
 			);
