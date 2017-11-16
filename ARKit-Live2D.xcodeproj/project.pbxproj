@@ -15,6 +15,7 @@
 		9E33221F1FBA0B2A00E186AF /* ARKit_Live2DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E33221E1FBA0B2A00E186AF /* ARKit_Live2DTests.swift */; };
 		9E33222A1FBA0B2A00E186AF /* ARKit_Live2DUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322291FBA0B2A00E186AF /* ARKit_Live2DUITests.swift */; };
 		9E3322381FBA0CAE00E186AF /* ContentUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322371FBA0CAE00E186AF /* ContentUpdater.swift */; };
+		9E33229B1FBA38CB00E186AF /* Live2D-binding.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322941FBA38CA00E186AF /* Live2D-binding.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,9 @@
 		9E3322291FBA0B2A00E186AF /* ARKit_Live2DUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARKit_Live2DUITests.swift; sourceTree = "<group>"; };
 		9E33222B1FBA0B2A00E186AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E3322371FBA0CAE00E186AF /* ContentUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentUpdater.swift; sourceTree = "<group>"; };
+		9E3322941FBA38CA00E186AF /* Live2D-binding.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Live2D-binding.mm"; sourceTree = "<group>"; };
+		9E3322961FBA38CA00E186AF /* Live2D-binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Live2D-binding.h"; sourceTree = "<group>"; };
+		9E33229A1FBA38CB00E186AF /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,9 @@
 		9E3322081FBA0B2A00E186AF /* ARKit-Live2D */ = {
 			isa = PBXGroup;
 			children = (
+				9E33229A1FBA38CB00E186AF /* Bridging-Header.h */,
+				9E3322961FBA38CA00E186AF /* Live2D-binding.h */,
+				9E3322941FBA38CA00E186AF /* Live2D-binding.mm */,
 				9E3322091FBA0B2A00E186AF /* AppDelegate.swift */,
 				9E33220B1FBA0B2A00E186AF /* ViewController.swift */,
 				9E3322371FBA0CAE00E186AF /* ContentUpdater.swift */,
@@ -196,6 +203,7 @@
 				TargetAttributes = {
 					9E3322051FBA0B2A00E186AF = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 					9E3322191FBA0B2A00E186AF = {
@@ -265,6 +273,7 @@
 				9E3322381FBA0CAE00E186AF /* ContentUpdater.swift in Sources */,
 				9E33220C1FBA0B2A00E186AF /* ViewController.swift in Sources */,
 				9E33220A1FBA0B2A00E186AF /* AppDelegate.swift in Sources */,
+				9E33229B1FBA38CB00E186AF /* Live2D-binding.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,13 +439,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					L2D_TARGET_IPHONE_ES2,
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "ARKit-Live2D/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lib/ios/$(CONFIGURATION)-$(PLATFORM_NAME)\"";
+				OTHER_LDFLAGS = "-lLive2D";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mzyy94.ARKit-Live2D";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/$(PROJECT_NAME)/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/include\"/**";
 			};
 			name = Debug;
 		};
@@ -444,13 +464,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PREPROCESSOR_DEFINITIONS = L2D_TARGET_IPHONE_ES2;
 				INFOPLIST_FILE = "ARKit-Live2D/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lib/ios/$(CONFIGURATION)-$(PLATFORM_NAME)\"";
+				OTHER_LDFLAGS = "-lLive2D";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mzyy94.ARKit-Live2D";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/$(PROJECT_NAME)/Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/include\"/**";
 			};
 			name = Release;
 		};
