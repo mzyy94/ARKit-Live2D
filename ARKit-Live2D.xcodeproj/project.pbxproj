@@ -61,6 +61,7 @@
 		9EE03DD91FBDED66004C3798 /* texture_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_01.png; sourceTree = "<group>"; };
 		9EE03DDA1FBDED66004C3798 /* texture_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_02.png; sourceTree = "<group>"; };
 		9EE03DDB1FBDED66004C3798 /* haru.moc */ = {isa = PBXFileReference; lastKnownFileType = file; path = haru.moc; sourceTree = "<group>"; };
+		9EE03DE01FBDF731004C3798 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +92,7 @@
 		9E3321FD1FBA0B2A00E186AF = {
 			isa = PBXGroup;
 			children = (
+				9EE03DE01FBDF731004C3798 /* README.md */,
 				9E3322081FBA0B2A00E186AF /* ARKit-Live2D */,
 				9E33221D1FBA0B2A00E186AF /* ARKit-Live2DTests */,
 				9E3322281FBA0B2A00E186AF /* ARKit-Live2DUITests */,
