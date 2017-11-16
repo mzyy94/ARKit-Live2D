@@ -1,8 +1,8 @@
 #  ARKit-Live2D
-ARKit face tracking with Live2D sample
+Live2D face motion control with ARKit face tracking sample
 
-![screenshot-1.png](docs/screenshot-1.png)
-![screenshot-2.png](docs/screenshot-2.png)
+<img src="docs/screenshot-1.png" alt="screenshot-1.png" width="375" style="display: inline-block"> <img src="docs/screenshot-2.png" alt="screenshot-2.png" width="375" style="display: inline-block">
+
 
 ## Preparation
 
