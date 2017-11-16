@@ -16,6 +16,10 @@
 		9E33222A1FBA0B2A00E186AF /* ARKit_Live2DUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322291FBA0B2A00E186AF /* ARKit_Live2DUITests.swift */; };
 		9E3322381FBA0CAE00E186AF /* ContentUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322371FBA0CAE00E186AF /* ContentUpdater.swift */; };
 		9E33229B1FBA38CB00E186AF /* Live2D-binding.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322941FBA38CA00E186AF /* Live2D-binding.mm */; };
+		9EE03DDC1FBDED66004C3798 /* texture_00.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE03DD81FBDED66004C3798 /* texture_00.png */; };
+		9EE03DDD1FBDED66004C3798 /* texture_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE03DD91FBDED66004C3798 /* texture_01.png */; };
+		9EE03DDE1FBDED66004C3798 /* texture_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE03DDA1FBDED66004C3798 /* texture_02.png */; };
+		9EE03DDF1FBDED66004C3798 /* haru.moc in Resources */ = {isa = PBXBuildFile; fileRef = 9EE03DDB1FBDED66004C3798 /* haru.moc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		9E3322941FBA38CA00E186AF /* Live2D-binding.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Live2D-binding.mm"; sourceTree = "<group>"; };
 		9E3322961FBA38CA00E186AF /* Live2D-binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Live2D-binding.h"; sourceTree = "<group>"; };
 		9E33229A1FBA38CB00E186AF /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		9EE03DD81FBDED66004C3798 /* texture_00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_00.png; sourceTree = "<group>"; };
+		9EE03DD91FBDED66004C3798 /* texture_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_01.png; sourceTree = "<group>"; };
+		9EE03DDA1FBDED66004C3798 /* texture_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_02.png; sourceTree = "<group>"; };
+		9EE03DDB1FBDED66004C3798 /* haru.moc */ = {isa = PBXFileReference; lastKnownFileType = file; path = haru.moc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +121,8 @@
 				9E3322101FBA0B2A00E186AF /* Assets.xcassets */,
 				9E3322121FBA0B2A00E186AF /* LaunchScreen.storyboard */,
 				9E3322151FBA0B2A00E186AF /* Info.plist */,
+				9EE03DD71FBDED66004C3798 /* haru.1024 */,
+				9EE03DDB1FBDED66004C3798 /* haru.moc */,
 			);
 			path = "ARKit-Live2D";
 			sourceTree = "<group>";
@@ -133,6 +143,16 @@
 				9E33222B1FBA0B2A00E186AF /* Info.plist */,
 			);
 			path = "ARKit-Live2DUITests";
+			sourceTree = "<group>";
+		};
+		9EE03DD71FBDED66004C3798 /* haru.1024 */ = {
+			isa = PBXGroup;
+			children = (
+				9EE03DD81FBDED66004C3798 /* texture_00.png */,
+				9EE03DD91FBDED66004C3798 /* texture_01.png */,
+				9EE03DDA1FBDED66004C3798 /* texture_02.png */,
+			);
+			path = haru.1024;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,8 +264,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E3322141FBA0B2A00E186AF /* LaunchScreen.storyboard in Resources */,
+				9EE03DDD1FBDED66004C3798 /* texture_01.png in Resources */,
+				9EE03DDC1FBDED66004C3798 /* texture_00.png in Resources */,
+				9EE03DDE1FBDED66004C3798 /* texture_02.png in Resources */,
 				9E3322111FBA0B2A00E186AF /* Assets.xcassets in Resources */,
 				9E33220F1FBA0B2A00E186AF /* Main.storyboard in Resources */,
+				9EE03DDF1FBDED66004C3798 /* haru.moc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
