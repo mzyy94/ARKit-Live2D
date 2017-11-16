@@ -35,10 +35,11 @@
  */
 
 import ARKit
+import GLKit
 import SceneKit
 import UIKit
 
-class ViewController: UIViewController, ARSessionDelegate {
+class ViewController: GLKViewController, ARSessionDelegate {
 
     let contentUpdater = ContentUpdater()
     @IBOutlet var sceneView: ARSCNView!
@@ -46,21 +47,53 @@ class ViewController: UIViewController, ARSessionDelegate {
         return sceneView.session
     }
 
+    var live2DModel: Live2DModelOpenGL!
+    
+    var context: EAGLContext!
+    var isEyeClosing: Bool = false
+    var eyeSpeed: CGFloat = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         sceneView.delegate = contentUpdater
         sceneView.session.delegate = self
         sceneView.automaticallyUpdatesLighting = true
+        
+        print("Live2D version: \(Live2D.live2DVersion())")
+        
+        self.context = EAGLContext(api: .openGLES2)
+        if context == nil {
+            print("Failed to create ES context")
+            return
+        }
+        
+        guard let view = self.view as? GLKView else {
+            print("Failed to cast view to GLKView")
+            return
+        }
+        view.context = self.context
+        view.drawableDepthFormat = .format24
+        
+        self.setupGL()
     }
 
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         UIApplication.shared.isIdleTimerDisabled = true
         
         resetTracking()
+        
+        if self.isViewLoaded && self.view.window == nil {
+            self.view = nil
+            self.tearDownGL()
+            
+            if EAGLContext.current() == self.context {
+                EAGLContext.setCurrent(nil)
+            }
+            self.context = nil
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -73,6 +106,13 @@ class ViewController: UIViewController, ARSessionDelegate {
         super.didReceiveMemoryWarning()
     }
 
+    deinit {
+        self.tearDownGL()
+        if EAGLContext.current() == self.context {
+            EAGLContext.setCurrent(nil)
+        }
+        self.context = nil
+    }
     
     // MARK: - ARSessionDelegate
     
@@ -107,6 +147,73 @@ class ViewController: UIViewController, ARSessionDelegate {
         let configuration = ARFaceTrackingConfiguration()
         configuration.isLightEstimationEnabled = true
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+    }
+    
+    // MARK: Live2D OpenGL setup
+
+    func setupGL() {
+        EAGLContext.setCurrent(self.context)
+        
+        Live2D.initL2D()
+        
+        let modelFile = "haru"
+        let textures = ["texture_00", "texture_01", "texture_02"]
+        
+        guard let modelPath = Bundle.main.path(forResource: modelFile, ofType: "moc") else {
+            print("Failed to find model file")
+            return
+        }
+        
+        live2DModel = Live2DModelOpenGL(modelPath: modelPath)
+        contentUpdater.live2DModel = live2DModel
+        
+        for (index, texture) in textures.enumerated() {
+            let filePath = Bundle.main.path(forResource: texture, ofType: "png")!
+            let textureInfo = try! GLKTextureLoader.texture(withContentsOfFile: filePath, options: [GLKTextureLoaderApplyPremultiplication: false, GLKTextureLoaderGenerateMipmaps: true])
+            
+            let num = textureInfo.name
+            live2DModel?.setTexture(Int32(index), to: num)
+        }
+    }
+    
+    func tearDownGL() {
+        live2DModel = nil
+        Live2D.dispose()
+        EAGLContext.setCurrent(self.context)
+    }
+    
+    // MARK: - GLKViewDelegate
+    
+    override func glkView(_ view: GLKView, drawIn rect: CGRect) {
+        glClearColor(0.65, 0.65, 0.65, 1.0)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
+        
+        let size = UIScreen.main.bounds.size
+        
+        let scx: Float = (Float)(5.6 / live2DModel.getCanvasWidth())
+        let scy: Float = (Float)(-5.6 / live2DModel.getCanvasWidth() * (Float)(size.width/size.height))
+        let x: Float = -2.8
+        let y: Float = 1
+        
+        let matrix4 = SCNMatrix4(
+            m11: scx, m12: 0,   m13: 0, m14: 0,
+            m21: 0,   m22: scy, m23: 0, m24: 0,
+            m31: 0,   m32: 0,   m33: 1, m34: 0,
+            m41: x,   m42: y,   m43: 0, m44: 1)
+        live2DModel.setMatrix(matrix4)
+        
+        let t = UtSystem.getUserTimeMSec() / 1000.0
+        
+        live2DModel.setParam("PARAM_BODY_ANGLE_Z", value: (CGFloat)(10.0 * sin(t)))
+        live2DModel.setParam("PARAM_HAIR_FRONT", value: (CGFloat)(sin(t)))
+        live2DModel.setParam("PARAM_HAIR_BACK", value: (CGFloat)(sin(t)))
+        live2DModel.setParam("PARAM_BREATH", value: (CGFloat)((cos(t) + 1.0) / 2.0))
+        live2DModel.setParam("PARAM_BUST_Y", value: (CGFloat)(cos(t)))
+        live2DModel.setPartsOpacity("PARTS_01_ARM_L_A_001", opacity: 0) // hide default position armL
+        live2DModel.setPartsOpacity("PARTS_01_ARM_R_A_001", opacity: 0) // hide default position armR
+
+        live2DModel.update()
+        live2DModel.draw()
     }
 }
 

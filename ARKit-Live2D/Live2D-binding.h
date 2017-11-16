@@ -54,6 +54,7 @@
 - (float)getCanvasWidth;
 - (void)setMatrix:(SCNMatrix4)matrix;
 - (void)setParam:(NSString *)paramId value:(CGFloat)value;
+- (void)setPartsOpacity:(NSString *)paramId opacity:(CGFloat)value;
 - (void)update;
 - (void)draw;
 

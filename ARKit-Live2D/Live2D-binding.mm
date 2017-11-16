@@ -96,6 +96,10 @@
     self.live2DModel->setParamFloat([paramId UTF8String], (float)(value));
 }
 
+- (void)setPartsOpacity:(NSString *)paramId opacity:(CGFloat)value {
+    self.live2DModel->setPartsOpacity([paramId UTF8String], (float)(value));
+}
+    
 - (void)update {
     self.live2DModel->update();
 }
