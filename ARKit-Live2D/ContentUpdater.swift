@@ -39,6 +39,7 @@ import ARKit
 
 class ContentUpdater: NSObject, ARSCNViewDelegate {
     
+    // MARK: - Properties
     var live2DModel: Live2DModelOpenGL!
 
     // MARK: - ARSCNViewDelegate

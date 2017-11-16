@@ -41,18 +41,17 @@ import UIKit
 
 class ViewController: GLKViewController, ARSessionDelegate {
 
+    // MARK: - Properties
     let contentUpdater = ContentUpdater()
     @IBOutlet var sceneView: ARSCNView!
     var session: ARSession {
         return sceneView.session
     }
-
     var live2DModel: Live2DModelOpenGL!
-    
     var context: EAGLContext!
-    var isEyeClosing: Bool = false
-    var eyeSpeed: CGFloat = 0.0
     
+    // MARK: - View Controller Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -101,10 +100,14 @@ class ViewController: GLKViewController, ARSessionDelegate {
         
         session.pause()
     }
-    
+
+    // MARK: - Memory Management
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+
+    // MARK: - Instance Life Cycle
 
     deinit {
         self.tearDownGL()
@@ -149,7 +152,7 @@ class ViewController: GLKViewController, ARSessionDelegate {
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
     
-    // MARK: Live2D OpenGL setup
+    // MARK: - Live2D OpenGL setup
 
     func setupGL() {
         EAGLContext.setCurrent(self.context)
