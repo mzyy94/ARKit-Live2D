@@ -39,7 +39,7 @@ import GLKit
 import SceneKit
 import UIKit
 
-class ViewController: GLKViewController, ARSessionDelegate {
+class ViewController: GLKViewController {
 
     // MARK: - Properties
     let contentUpdater = ContentUpdater()
@@ -127,33 +127,6 @@ class ViewController: GLKViewController, ARSessionDelegate {
         self.sceneView.isHidden = !self.sceneView.isHidden
     }
     
-    // MARK: - ARSessionDelegate
-    
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        guard error is ARError else { return }
-        
-        let errorWithInfo = error as NSError
-        let messages = [
-            errorWithInfo.localizedDescription,
-            errorWithInfo.localizedFailureReason,
-            errorWithInfo.localizedRecoverySuggestion
-        ]
-        let errorMessage = messages.flatMap({ $0 }).joined(separator: "\n")
-        
-        DispatchQueue.main.async {
-            print("The AR session failed. ::" + errorMessage)
-        }
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        DispatchQueue.main.async {
-            self.resetTracking()
-        }
-    }
-    
     /// - Tag: ARFaceTrackingSetup
     func resetTracking() {
         guard ARFaceTrackingConfiguration.isSupported else { return }
@@ -227,6 +200,35 @@ class ViewController: GLKViewController, ARSessionDelegate {
 
         live2DModel.update()
         live2DModel.draw()
+    }
+}
+
+// MARK: - ARSessionDelegate
+
+extension ViewController: ARSessionDelegate {    
+    func session(_ session: ARSession, didFailWithError error: Error) {
+        guard error is ARError else { return }
+        
+        let errorWithInfo = error as NSError
+        let messages = [
+            errorWithInfo.localizedDescription,
+            errorWithInfo.localizedFailureReason,
+            errorWithInfo.localizedRecoverySuggestion
+        ]
+        let errorMessage = messages.flatMap({ $0 }).joined(separator: "\n")
+        
+        DispatchQueue.main.async {
+            print("The AR session failed. ::" + errorMessage)
+        }
+    }
+    
+    func sessionWasInterrupted(_ session: ARSession) {
+    }
+    
+    func sessionInterruptionEnded(_ session: ARSession) {
+        DispatchQueue.main.async {
+            self.resetTracking()
+        }
     }
 }
 
