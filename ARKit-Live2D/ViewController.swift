@@ -59,7 +59,8 @@ class ViewController: GLKViewController, ARSessionDelegate {
         sceneView.session.delegate = self
         sceneView.automaticallyUpdatesLighting = true
         
-        print("Live2D version: \(Live2D.live2DVersion())")
+        let touchUp = UITapGestureRecognizer(target: self, action: #selector(ViewController.toggleSceneView))
+        view.addGestureRecognizer(touchUp)
         
         self.context = EAGLContext(api: .openGLES2)
         if context == nil {
@@ -72,7 +73,6 @@ class ViewController: GLKViewController, ARSessionDelegate {
             return
         }
         view.context = self.context
-        view.drawableDepthFormat = .format24
         
         self.setupGL()
     }
@@ -115,6 +115,12 @@ class ViewController: GLKViewController, ARSessionDelegate {
             EAGLContext.setCurrent(nil)
         }
         self.context = nil
+    }
+    
+    // MARK: - Gesture action
+    
+    @objc func toggleSceneView() {
+        self.sceneView.isHidden = !self.sceneView.isHidden
     }
     
     // MARK: - ARSessionDelegate
