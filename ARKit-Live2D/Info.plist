@@ -22,6 +22,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Used for AR Face tracking</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Used for Live Broadcasting</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

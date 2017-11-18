@@ -38,11 +38,13 @@ import ARKit
 import GLKit
 import SceneKit
 import UIKit
+import ReplayKit
 
 class ViewController: GLKViewController {
 
     // MARK: - Properties
     let contentUpdater = ContentUpdater()
+    let controller = RPBroadcastController()
     @IBOutlet var sceneView: ARSCNView!
     var session: ARSession {
         return sceneView.session
@@ -58,9 +60,6 @@ class ViewController: GLKViewController {
         sceneView.delegate = contentUpdater
         sceneView.session.delegate = self
         sceneView.automaticallyUpdatesLighting = true
-        
-        let touchUp = UITapGestureRecognizer(target: self, action: #selector(ViewController.toggleSceneView))
-        view.addGestureRecognizer(touchUp)
         
         self.context = EAGLContext(api: .openGLES2)
         if context == nil {
@@ -111,6 +110,18 @@ class ViewController: GLKViewController {
         super.didReceiveMemoryWarning()
     }
 
+    // MARK: - Utility
+    func errorString(_ error: Error) -> String {
+        let errorWithInfo = error as NSError
+        let messages = [
+            errorWithInfo.localizedDescription,
+            errorWithInfo.localizedFailureReason,
+            errorWithInfo.localizedRecoverySuggestion
+        ]
+        let errorMessage = messages.flatMap({ $0 }).joined(separator: "\n")
+        return errorMessage
+    }
+    
     // MARK: - Instance Life Cycle
 
     deinit {
@@ -122,11 +133,54 @@ class ViewController: GLKViewController {
     }
     
     // MARK: - Gesture action
-    
-    @objc func toggleSceneView() {
-        self.sceneView.isHidden = !self.sceneView.isHidden
+
+    @IBAction func tapInfoButton() {
+        let liveBroadcast = UIAlertAction(title: controller.isBroadcasting ? "Stop Broadcast" : "Live Broadcast", style: .default, handler: { action in
+            if self.controller.isBroadcasting {
+                self.stopBroadcast()
+            } else {
+                self.startBroadcast()
+            }
+        })
+        
+        let toggleSceneView = UIAlertAction(title: sceneView.isHidden ? "Show Front View" : "Hide Front View", style: .default, handler: { action in
+            self.sceneView.isHidden = !self.sceneView.isHidden
+        })
+        
+        let actionSheet = UIAlertController(title: "Option", message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(liveBroadcast)
+        actionSheet.addAction(toggleSceneView)
+
+        actionSheet.addAction(UIAlertAction(title: "Cacnel", style: .cancel, handler: nil))
+        
+        self.show(actionSheet, sender: self)
     }
     
+    // MARK: - ReplayKit Live broadcasting
+    
+    func startBroadcast() {
+        RPScreenRecorder.shared().isMicrophoneEnabled = true // Not work?
+        RPBroadcastActivityViewController.load { broadcastAVC, error in
+            if error != nil {
+                print("Load BroadcastActivityViewController failed. ::" + self.errorString(error!))
+                return
+            }
+            if let broadcastAVC = broadcastAVC {
+                broadcastAVC.delegate = self
+                self.present(broadcastAVC, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func stopBroadcast() {
+        controller.finishBroadcast { error in
+            if error != nil {
+                print("Finish broadcast failed. ::" + self.errorString(error!))
+                return
+            }
+        }
+    }
+
     /// - Tag: ARFaceTrackingSetup
     func resetTracking() {
         guard ARFaceTrackingConfiguration.isSupported else { return }
@@ -228,6 +282,27 @@ extension ViewController: ARSessionDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
         DispatchQueue.main.async {
             self.resetTracking()
+        }
+    }
+}
+
+// MARK: - RPBroadcastActivityViewControllerDelegate
+
+extension ViewController: RPBroadcastActivityViewControllerDelegate {
+    func broadcastActivityViewController(_ broadcastActivityViewController: RPBroadcastActivityViewController, didFinishWith broadcastController: RPBroadcastController?, error: Error?) {
+        if error != nil {
+            broadcastActivityViewController.dismiss(animated: false, completion: nil)
+            print("Set broadcast controller failed. ::" + self.errorString(error!))
+            return
+        }
+        
+        broadcastActivityViewController.dismiss(animated: true) {
+            broadcastController?.startBroadcast { error in
+                if error != nil {
+                    print("Start broadcast failed. ::" + self.errorString(error!))
+                    return
+                }
+            }
         }
     }
 }
