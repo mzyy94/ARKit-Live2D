@@ -1,8 +1,19 @@
 #  ARKit-Live2D
 Live2D face motion control with ARKit face tracking sample
 
-<img src="docs/screenshot-1.png" alt="screenshot-1.png" width="375" style="display: inline-block"> <img src="docs/screenshot-2.png" alt="screenshot-2.png" width="375" style="display: inline-block">
+![docs/screenshot.png](docs/screenshot.png)
 
+## Implementations
+
+- iPhone X ARKit Face tracking
+- Live2D Cubism Face motion control
+- ReplayKit Live broadcasting
+
+## Requirements
+
+- iPhone X (Actual one, not simulator)
+  - iOS 11.1 or higher version
+- Xcode 9.1
 
 ## Preparation
 
