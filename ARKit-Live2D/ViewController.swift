@@ -101,6 +101,10 @@ class ViewController: GLKViewController, ARSessionDelegate {
         session.pause()
     }
 
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
     // MARK: - Memory Management
 
     override func didReceiveMemoryWarning() {
