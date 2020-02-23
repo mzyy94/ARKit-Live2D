@@ -69,7 +69,8 @@ class ContentUpdater: NSObject, ARSCNViewDelegate {
         live2DModel.setParam("ParamAngleX", value: faceNode.eulerAngles.y * 360 / Float.pi)
         live2DModel.setParam("ParamAngleZ", value: faceNode.eulerAngles.z * -360 / Float.pi)
         
-        live2DModel.setParam("ParamBodyAngleX", value: faceNode.position.z * 20)
+        live2DModel.setParam("ParamBodyPosition", value: 10 + faceNode.position.z * 20)
+        live2DModel.setParam("ParamBodyAngleZ", value: faceNode.position.x * 20)
         live2DModel.setParam("ParamBodyAngleY", value: faceNode.position.y * 20)
         
         live2DModel.setParam("ParamEyeBallX", value: faceAnchor.lookAtPoint.x * 2)
