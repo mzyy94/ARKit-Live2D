@@ -212,13 +212,3 @@ static Allocator _allocator;
     _userModel->GetRenderer<Live2D::Cubism::Framework::Rendering::CubismRenderer_OpenGLES2>()->DrawModel();
 }
 @end
-
-#pragma mark - UtSystem class
-
-// FIXME: Remove UtSystem and change to other method
-
-@implementation UtSystem
-+ (CGFloat)getUserTimeMSec {
-    return 0.1f;
-}
-@end

@@ -68,9 +68,4 @@
 
 @end
 
-@interface UtSystem : NSObject
-+ (CGFloat)getUserTimeMSec;
-@end
-
-
 #endif /* Live2D_binding_h */
