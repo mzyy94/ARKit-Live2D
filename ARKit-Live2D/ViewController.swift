@@ -196,15 +196,15 @@ class ViewController: GLKViewController {
         
         Live2DCubism.initL2D()
         
-        let modelFile = "hiyori_movie_pro_t01"
+        let jsonFile = "hiyori_movie_pro_t01.model3"
         let textures = ["texture_00"]
         
-        guard let modelPath = Bundle.main.path(forResource: modelFile, ofType: "moc3") else {
-            print("Failed to find model file")
+        guard let jsonPath = Bundle.main.path(forResource: jsonFile, ofType: "json") else {
+            print("Failed to find model json file")
             return
         }
         
-        live2DModel = Live2DModelOpenGL(modelPath: modelPath)
+        live2DModel = Live2DModelOpenGL(jsonPath: jsonPath)
         contentUpdater.live2DModel = live2DModel
         
         for (index, texture) in textures.enumerated() {

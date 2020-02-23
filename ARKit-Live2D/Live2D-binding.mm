@@ -39,6 +39,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <SceneKit/SceneKit.h>
+#import "CubismModelSettingJson.hpp"
 #import "Model/CubismUserModel.hpp"
 #import "Rendering/OpenGL/CubismRenderer_OpenGLES2.hpp"
 #import "Id/CubismIdManager.hpp"
@@ -119,16 +120,24 @@ static Allocator _allocator;
 
 @interface Live2DModelOpenGL ()
 
-@property (nonatomic, assign) Live2D::Cubism::Framework::CubismUserModel *userModel;
+@property (nonatomic, assign) CubismUserModel *userModel;
+@property (nonatomic, assign) NSURL *baseUrl;
+@property (nonatomic, assign) ICubismModelSetting *modelSetting;
 
 @end
 
 @implementation Live2DModelOpenGL
-- (instancetype)initWithModelPath:(NSString *)modelPath {
+- (instancetype)initWithJsonPath:(NSString *)jsonPath {
     if (self = [super init]) {
-        NSURL *url = [NSURL fileURLWithPath:modelPath];
+        NSURL *url = [NSURL fileURLWithPath:jsonPath];
+        NSData *jsonData = [NSData dataWithContentsOfURL:url];
+
+        _modelSetting = new CubismModelSettingJson((const unsigned char *)[jsonData bytes], (unsigned int)[jsonData length]);
+        _baseUrl = [url URLByDeletingLastPathComponent];
+
+        url = [_baseUrl URLByAppendingPathComponent:[NSString stringWithUTF8String:_modelSetting->GetModelFileName()]];
+
         NSData *data = [NSData dataWithContentsOfURL:url];
-        
         _userModel = new CubismUserModel();
         _userModel->LoadModel((const unsigned char *)[data bytes], (unsigned int)[data length]);
         _userModel->CreateRenderer();

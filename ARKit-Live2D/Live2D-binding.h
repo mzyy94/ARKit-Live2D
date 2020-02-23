@@ -49,7 +49,7 @@
 
 @interface Live2DModelOpenGL : NSObject
 
-- (instancetype)initWithModelPath:(NSString *)modelPath;
+- (instancetype)initWithJsonPath:(NSString *)jsonPath;
 - (void)setTexture:(int)textureNo to:(uint32_t)openGLTextureNo;
 - (void)setPremultipliedAlpha:(bool)enable;
 - (float)getCanvasWidth;
