@@ -45,6 +45,8 @@
 		287E5EA023FE5E4300872E43 /* CubismPhysicsJson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287E5E7223FE5E4200872E43 /* CubismPhysicsJson.cpp */; };
 		287E5EA123FE5E4300872E43 /* CubismPhysics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287E5E7323FE5E4200872E43 /* CubismPhysics.cpp */; };
 		287E5EA3240291BE00872E43 /* libCubismNativeFramework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 287E5DE923FE5C8000872E43 /* libCubismNativeFramework.a */; };
+		287E5EAC2402AFB600872E43 /* texture_00.png in Resources */ = {isa = PBXBuildFile; fileRef = 287E5EAA2402AFB600872E43 /* texture_00.png */; };
+		287E5EAD2402AFB600872E43 /* natori_pro_t03.moc3 in Resources */ = {isa = PBXBuildFile; fileRef = 287E5EAB2402AFB600872E43 /* natori_pro_t03.moc3 */; };
 		9E33220A1FBA0B2A00E186AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322091FBA0B2A00E186AF /* AppDelegate.swift */; };
 		9E33220C1FBA0B2A00E186AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E33220B1FBA0B2A00E186AF /* ViewController.swift */; };
 		9E33220F1FBA0B2A00E186AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E33220D1FBA0B2A00E186AF /* Main.storyboard */; };
@@ -54,10 +56,6 @@
 		9E33222A1FBA0B2A00E186AF /* ARKit_Live2DUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322291FBA0B2A00E186AF /* ARKit_Live2DUITests.swift */; };
 		9E3322381FBA0CAE00E186AF /* ContentUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322371FBA0CAE00E186AF /* ContentUpdater.swift */; };
 		9E33229B1FBA38CB00E186AF /* Live2D-binding.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322941FBA38CA00E186AF /* Live2D-binding.mm */; };
-		9EE03DDC1FBDED66004C3798 /* texture_00.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE03DD81FBDED66004C3798 /* texture_00.png */; };
-		9EE03DDD1FBDED66004C3798 /* texture_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE03DD91FBDED66004C3798 /* texture_01.png */; };
-		9EE03DDE1FBDED66004C3798 /* texture_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE03DDA1FBDED66004C3798 /* texture_02.png */; };
-		9EE03DDF1FBDED66004C3798 /* haru.moc in Resources */ = {isa = PBXBuildFile; fileRef = 9EE03DDB1FBDED66004C3798 /* haru.moc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +205,8 @@
 		287E5E7223FE5E4200872E43 /* CubismPhysicsJson.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CubismPhysicsJson.cpp; sourceTree = "<group>"; };
 		287E5E7323FE5E4200872E43 /* CubismPhysics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CubismPhysics.cpp; sourceTree = "<group>"; };
 		287E5E7423FE5E4200872E43 /* CubismFramework.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CubismFramework.hpp; sourceTree = "<group>"; };
+		287E5EAA2402AFB600872E43 /* texture_00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_00.png; sourceTree = "<group>"; };
+		287E5EAB2402AFB600872E43 /* natori_pro_t03.moc3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = natori_pro_t03.moc3; sourceTree = "<group>"; };
 		9E3322061FBA0B2A00E186AF /* ARKit-Live2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ARKit-Live2D.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E3322091FBA0B2A00E186AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E33220B1FBA0B2A00E186AF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -224,10 +224,6 @@
 		9E3322941FBA38CA00E186AF /* Live2D-binding.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Live2D-binding.mm"; sourceTree = "<group>"; };
 		9E3322961FBA38CA00E186AF /* Live2D-binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Live2D-binding.h"; sourceTree = "<group>"; };
 		9E33229A1FBA38CB00E186AF /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		9EE03DD81FBDED66004C3798 /* texture_00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_00.png; sourceTree = "<group>"; };
-		9EE03DD91FBDED66004C3798 /* texture_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_01.png; sourceTree = "<group>"; };
-		9EE03DDA1FBDED66004C3798 /* texture_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_02.png; sourceTree = "<group>"; };
-		9EE03DDB1FBDED66004C3798 /* haru.moc */ = {isa = PBXFileReference; lastKnownFileType = file; path = haru.moc; sourceTree = "<group>"; };
 		9EE03DE01FBDF731004C3798 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -498,6 +494,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		287E5EA92402AFB600872E43 /* natori_pro_t03.4096 */ = {
+			isa = PBXGroup;
+			children = (
+				287E5EAA2402AFB600872E43 /* texture_00.png */,
+			);
+			path = natori_pro_t03.4096;
+			sourceTree = "<group>";
+		};
 		9E3321FD1FBA0B2A00E186AF = {
 			isa = PBXGroup;
 			children = (
@@ -533,10 +537,10 @@
 				9E3322371FBA0CAE00E186AF /* ContentUpdater.swift */,
 				9E33220D1FBA0B2A00E186AF /* Main.storyboard */,
 				9E3322101FBA0B2A00E186AF /* Assets.xcassets */,
+				287E5EA92402AFB600872E43 /* natori_pro_t03.4096 */,
+				287E5EAB2402AFB600872E43 /* natori_pro_t03.moc3 */,
 				9E3322121FBA0B2A00E186AF /* LaunchScreen.storyboard */,
 				9E3322151FBA0B2A00E186AF /* Info.plist */,
-				9EE03DD71FBDED66004C3798 /* haru.1024 */,
-				9EE03DDB1FBDED66004C3798 /* haru.moc */,
 			);
 			path = "ARKit-Live2D";
 			sourceTree = "<group>";
@@ -557,16 +561,6 @@
 				9E33222B1FBA0B2A00E186AF /* Info.plist */,
 			);
 			path = "ARKit-Live2DUITests";
-			sourceTree = "<group>";
-		};
-		9EE03DD71FBDED66004C3798 /* haru.1024 */ = {
-			isa = PBXGroup;
-			children = (
-				9EE03DD81FBDED66004C3798 /* texture_00.png */,
-				9EE03DD91FBDED66004C3798 /* texture_01.png */,
-				9EE03DDA1FBDED66004C3798 /* texture_02.png */,
-			);
-			path = haru.1024;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -700,12 +694,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E3322141FBA0B2A00E186AF /* LaunchScreen.storyboard in Resources */,
-				9EE03DDD1FBDED66004C3798 /* texture_01.png in Resources */,
-				9EE03DDC1FBDED66004C3798 /* texture_00.png in Resources */,
-				9EE03DDE1FBDED66004C3798 /* texture_02.png in Resources */,
+				287E5EAD2402AFB600872E43 /* natori_pro_t03.moc3 in Resources */,
+				287E5EAC2402AFB600872E43 /* texture_00.png in Resources */,
 				9E3322111FBA0B2A00E186AF /* Assets.xcassets in Resources */,
 				9E33220F1FBA0B2A00E186AF /* Main.storyboard in Resources */,
-				9EE03DDF1FBDED66004C3798 /* haru.moc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
