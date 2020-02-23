@@ -58,6 +58,7 @@
 - (void)setMatrix:(SCNMatrix4)matrix;
 - (void)setParam:(NSString *)paramId value:(Float32)value;
 - (void)setPartsOpacity:(NSString *)paramId opacity:(Float32)value;
+- (void)updatePhysics:(Float32)delta;
 - (void)update;
 - (void)draw;
 

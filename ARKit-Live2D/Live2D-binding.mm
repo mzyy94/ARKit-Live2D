@@ -43,6 +43,7 @@
 #import "Model/CubismUserModel.hpp"
 #import "Rendering/OpenGL/CubismRenderer_OpenGLES2.hpp"
 #import "Id/CubismIdManager.hpp"
+#import "CubismPhysics.hpp"
 
 using namespace Live2D::Cubism::Framework;
 using namespace Live2D::Cubism::Core;
@@ -122,6 +123,7 @@ static Allocator _allocator;
 
 @property (nonatomic, assign) CubismUserModel *userModel;
 @property (nonatomic, assign) NSURL *baseUrl;
+@property (nonatomic, assign) CubismPhysics *physics;
 @property (nonatomic, assign) ICubismModelSetting *modelSetting;
 
 @end
@@ -142,6 +144,14 @@ static Allocator _allocator;
         _userModel->LoadModel((const unsigned char *)[data bytes], (unsigned int)[data length]);
         _userModel->CreateRenderer();
         _userModel->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->Initialize(_userModel->GetModel());
+        
+        if (strcmp(_modelSetting->GetPhysicsFileName(), "") != 0)
+        {
+            NSURL* url = [_baseUrl URLByAppendingPathComponent:[NSString stringWithUTF8String:_modelSetting->GetPhysicsFileName()]];
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            _physics = CubismPhysics::Create((const unsigned char *)[data bytes], (unsigned int)[data length]);
+        }
+        
     }
     return self;
 }
@@ -188,6 +198,10 @@ static Allocator _allocator;
 - (void)setPartsOpacity:(NSString *)paramId opacity:(Float32)value {
     const auto cid = CubismFramework::GetIdManager()->GetId((const char*)[paramId UTF8String]);
     _userModel->GetModel()->SetPartOpacity(cid, value);
+}
+
+- (void)updatePhysics:(Float32)delta {
+    _physics->Evaluate(_userModel->GetModel(), delta);
 }
     
 - (void)update {

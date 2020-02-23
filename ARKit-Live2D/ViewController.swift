@@ -51,6 +51,7 @@ class ViewController: GLKViewController {
     }
     var live2DModel: Live2DModelOpenGL!
     var context: EAGLContext!
+    var lastFrame: TimeInterval = 0.0
     
     // MARK: - View Controller Life Cycle
 
@@ -230,6 +231,8 @@ class ViewController: GLKViewController {
             m31: 0,   m32: 0,   m33: 1, m34: 0,
             m41: x,   m42: y,   m43: 0, m44: 1)
         live2DModel.setMatrix(matrix4)
+        
+        _ = updateFrame()
     }
     
     func tearDownGL() {
@@ -244,8 +247,20 @@ class ViewController: GLKViewController {
         glClearColor(0.65, 0.65, 0.65, 1.0)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
         
+        let delta = updateFrame()
+        live2DModel.updatePhysics(Float(delta))
+        
         live2DModel.update()
         live2DModel.draw()
+    }
+    
+    // MARK: - Frame Update
+    
+    func updateFrame() -> TimeInterval {
+        let now = Date().timeIntervalSince1970
+        let deltaTime = now - lastFrame
+        lastFrame = now
+        return deltaTime
     }
 }
 
