@@ -214,6 +214,8 @@ class ViewController: GLKViewController {
             let num = textureInfo.name
             live2DModel?.setTexture(Int32(index), to: num)
         }
+        
+        live2DModel?.setPremultipliedAlpha(true);
     }
     
     func tearDownGL() {

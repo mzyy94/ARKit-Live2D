@@ -141,6 +141,10 @@ static Allocator _allocator;
     _userModel->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->BindTexture(textureNo, openGLTextureNo);
 }
 
+- (void)setPremultipliedAlpha:(bool)enable {
+    _userModel->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->IsPremultipliedAlpha(enable);
+}
+
 - (float)getCanvasWidth {
     return _userModel->GetModel()->GetCanvasWidth();
 }

@@ -51,6 +51,7 @@
 
 - (instancetype)initWithModelPath:(NSString *)modelPath;
 - (void)setTexture:(int)textureNo to:(uint32_t)openGLTextureNo;
+- (void)setPremultipliedAlpha:(bool)enable;
 - (float)getCanvasWidth;
 - (void)setMatrix:(SCNMatrix4)matrix;
 - (void)setParam:(NSString *)paramId value:(CGFloat)value;
