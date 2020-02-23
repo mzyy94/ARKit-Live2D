@@ -161,12 +161,12 @@ static Allocator _allocator;
     _userModel->GetRenderer<Live2D::Cubism::Framework::Rendering::CubismRenderer_OpenGLES2>()->SetMvpMatrix(cMatrix);
 }
 
-- (void)setParam:(NSString *)paramId value:(CGFloat)value {
+- (void)setParam:(NSString *)paramId value:(Float32)value {
     const auto cid = CubismFramework::GetIdManager()->GetId((const char*)[paramId UTF8String]);
     _userModel->GetModel()->AddParameterValue(cid, value);
 }
 
-- (void)setPartsOpacity:(NSString *)paramId opacity:(CGFloat)value {
+- (void)setPartsOpacity:(NSString *)paramId opacity:(Float32)value {
     const auto cid = CubismFramework::GetIdManager()->GetId((const char*)[paramId UTF8String]);
     _userModel->GetModel()->SetPartOpacity(cid, value);
 }

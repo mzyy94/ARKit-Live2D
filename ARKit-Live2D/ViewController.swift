@@ -246,10 +246,10 @@ class ViewController: GLKViewController {
         
         let t = UtSystem.getUserTimeMSec() / 1000.0
         
-        live2DModel.setParam("ParamBodyAngleZ", value: (CGFloat)(10.0 * sin(t)))
-        live2DModel.setParam("ParamHairFront", value: (CGFloat)(sin(t)))
-        live2DModel.setParam("ParamHairBack", value: (CGFloat)(sin(t)))
-        live2DModel.setParam("ParamBreath", value: (CGFloat)((cos(t) + 1.0) / 2.0))
+        live2DModel.setParam("ParamBodyAngleZ", value: Float32(10.0 * sin(t)))
+        live2DModel.setParam("ParamHairFront", value: Float32(sin(t)))
+        live2DModel.setParam("ParamHairBack", value: Float32(sin(t)))
+        live2DModel.setParam("ParamBreath", value: Float32((cos(t) + 1.0) / 2.0))
         live2DModel.setPartsOpacity("PartArmB", opacity: 0) // hide alternative position arm
 
         live2DModel.update()
