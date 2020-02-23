@@ -39,22 +39,79 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <SceneKit/SceneKit.h>
-#import "Live2DModelOpenGL.h"
-#import "UtSystem.h"
+#import "Model/CubismUserModel.hpp"
+#import "Rendering/OpenGL/CubismRenderer_OpenGLES2.hpp"
+#import "Id/CubismIdManager.hpp"
+
+using namespace Live2D::Cubism::Framework;
+using namespace Live2D::Cubism::Core;
+
+#pragma mark - Allocator class
+
+class Allocator : public Csm::ICubismAllocator
+{
+    void* Allocate(const Csm::csmSizeType size) {
+        return malloc(size);
+    }
+    
+    void Deallocate(void* memory) {
+        free(memory);
+    }
+    
+    void* AllocateAligned(const Csm::csmSizeType size, const Csm::csmUint32 alignment) {
+        size_t offset, shift, alignedAddress;
+        void* allocation;
+        void** preamble;
+
+        offset = alignment - 1 + sizeof(void*);
+
+        allocation = Allocate(size + static_cast<csmUint32>(offset));
+
+        alignedAddress = reinterpret_cast<size_t>(allocation) + sizeof(void*);
+
+        shift = alignedAddress % alignment;
+
+        if (shift)
+        {
+            alignedAddress += (alignment - shift);
+        }
+
+        preamble = reinterpret_cast<void**>(alignedAddress);
+        preamble[-1] = allocation;
+
+        return reinterpret_cast<void*>(alignedAddress);
+    }
+    
+    void DeallocateAligned(void* alignedMemory){
+        void** preamble;
+
+        preamble = static_cast<void**>(alignedMemory);
+
+        Deallocate(preamble[-1]);
+    }
+};
 
 #pragma mark - Live2DCubism class
 
+static Allocator _allocator;
+
 @implementation Live2DCubism
 + (void)initL2D {
-    live2d::Live2D::init();
+    Csm::CubismFramework::StartUp(&_allocator, NULL);
+    Csm::CubismFramework::Initialize();
 }
 
 + (void)dispose {
-    live2d::Live2D::dispose();
+    Csm::CubismFramework::Dispose();
 }
 
 + (NSString *)live2DVersion {
-    return [NSString stringWithUTF8String:live2d::Live2D::getVersionStr()];
+    unsigned int version = csmGetVersion();
+    unsigned int major = (version >> 24) & 0xff;
+    unsigned int minor = (version >> 16) & 0xff;
+    unsigned int patch = version & 0xffff;
+
+    return [NSString stringWithFormat:@"v%1$d.%2$d.%3$d", major, minor, patch];
 }
 @end
 
@@ -62,24 +119,30 @@
 
 @interface Live2DModelOpenGL ()
 
-@property (nonatomic, assign) live2d::Live2DModelOpenGL *live2DModel;
+@property (nonatomic, assign) Live2D::Cubism::Framework::CubismUserModel *userModel;
 
 @end
 
 @implementation Live2DModelOpenGL
 - (instancetype)initWithModelPath:(NSString *)modelPath {
     if (self = [super init]) {
-        _live2DModel = live2d::Live2DModelOpenGL::loadModel( [modelPath UTF8String] ) ;
+        NSURL *url = [NSURL fileURLWithPath:modelPath];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        
+        _userModel = new CubismUserModel();
+        _userModel->LoadModel((const unsigned char *)[data bytes], (unsigned int)[data length]);
+        _userModel->CreateRenderer();
+        _userModel->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->Initialize(_userModel->GetModel());
     }
     return self;
 }
 
 - (void)setTexture:(int)textureNo to:(uint32_t)openGLTextureNo {
-    self.live2DModel->setTexture( textureNo , openGLTextureNo ) ;
+    _userModel->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->BindTexture(textureNo, openGLTextureNo);
 }
 
 - (float)getCanvasWidth {
-    return self.live2DModel->getCanvasWidth();
+    return _userModel->GetModel()->GetCanvasWidth();
 }
 
 - (void)setMatrix:(SCNMatrix4)matrix {
@@ -89,30 +152,36 @@
         matrix.m31, matrix.m32, matrix.m33, matrix.m34,
         matrix.m41, matrix.m42, matrix.m43, matrix.m44
     };
-    self.live2DModel->setMatrix(fMatrix);
+    const auto cMatrix = new CubismMatrix44();
+    cMatrix->SetMatrix(fMatrix);
+    _userModel->GetRenderer<Live2D::Cubism::Framework::Rendering::CubismRenderer_OpenGLES2>()->SetMvpMatrix(cMatrix);
 }
 
 - (void)setParam:(NSString *)paramId value:(CGFloat)value {
-    self.live2DModel->setParamFloat([paramId UTF8String], (float)(value));
+    const auto cid = CubismFramework::GetIdManager()->GetId((const char*)[paramId UTF8String]);
+    _userModel->GetModel()->AddParameterValue(cid, value);
 }
 
 - (void)setPartsOpacity:(NSString *)paramId opacity:(CGFloat)value {
-    self.live2DModel->setPartsOpacity([paramId UTF8String], (float)(value));
+    const auto cid = CubismFramework::GetIdManager()->GetId((const char*)[paramId UTF8String]);
+    _userModel->GetModel()->SetPartOpacity(cid, value);
 }
     
 - (void)update {
-    self.live2DModel->update();
+   _userModel->GetModel()->Update();
 }
 
 - (void)draw {
-    self.live2DModel->draw();
+    _userModel->GetRenderer<Live2D::Cubism::Framework::Rendering::CubismRenderer_OpenGLES2>()->DrawModel();
 }
 @end
 
 #pragma mark - UtSystem class
 
+// FIXME: Remove UtSystem and change to other method
+
 @implementation UtSystem
 + (CGFloat)getUserTimeMSec {
-    return live2d::UtSystem::getUserTimeMSec();
+    return 0.1f;
 }
 @end
