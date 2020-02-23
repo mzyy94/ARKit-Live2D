@@ -101,8 +101,8 @@ class ViewController: GLKViewController {
         session.pause()
     }
 
-    override var prefersStatusBarHidden: Bool {
-        return true
+    override var preferredScreenEdgesDeferringSystemGestures: UIRectEdge {
+        return .bottom
     }
 
     // MARK: - Memory Management
