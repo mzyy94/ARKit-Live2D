@@ -64,6 +64,9 @@ class ContentUpdater: NSObject, ARSCNViewDelegate {
 
         live2DModel.setParam("ParamAngleZ", value: atan2f(c.1.x, c.1.y) * 180 / Float.pi)
 
+        live2DModel.setParam("ParamEyeBallX", value: faceAnchor.lookAtPoint.x * 2)
+        live2DModel.setParam("ParamEyeBallY", value: faceAnchor.lookAtPoint.y * 2)
+        
         live2DModel.setParam("ParamBrowLY", value: -(0.5 - browOuterUpLeft))
         live2DModel.setParam("ParamBrowRY", value: -(0.5 - browOuterUpRight))
         live2DModel.setParam("ParamBrowLAngle", value: 2*(browInnerUp - browOuterUpLeft))
