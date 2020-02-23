@@ -246,13 +246,15 @@ class ViewController: GLKViewController {
         
         let t = UtSystem.getUserTimeMSec() / 1000.0
         
-        live2DModel.setParam("PARAM_BODY_ANGLE_Z", value: (CGFloat)(10.0 * sin(t)))
-        live2DModel.setParam("PARAM_HAIR_FRONT", value: (CGFloat)(sin(t)))
-        live2DModel.setParam("PARAM_HAIR_BACK", value: (CGFloat)(sin(t)))
-        live2DModel.setParam("PARAM_BREATH", value: (CGFloat)((cos(t) + 1.0) / 2.0))
-        live2DModel.setParam("PARAM_BUST_Y", value: (CGFloat)(cos(t)))
-        live2DModel.setPartsOpacity("PARTS_01_ARM_L_A_001", opacity: 0) // hide default position armL
-        live2DModel.setPartsOpacity("PARTS_01_ARM_R_A_001", opacity: 0) // hide default position armR
+        live2DModel.setParam("ParamBodyAngleZ", value: (CGFloat)(10.0 * sin(t)))
+        live2DModel.setParam("ParamHairFront", value: (CGFloat)(sin(t)))
+        live2DModel.setParam("ParamHairBack", value: (CGFloat)(sin(t)))
+        live2DModel.setParam("ParamBreath", value: (CGFloat)((cos(t) + 1.0) / 2.0))
+        live2DModel.setPartsOpacity("PartArmCL", opacity: 0) // hide alternative position armL
+        live2DModel.setPartsOpacity("PartArmDL", opacity: 0) // hide alternative position armL
+        live2DModel.setPartsOpacity("PartArmBR", opacity: 0) // hide alternative position armR
+        live2DModel.setPartsOpacity("PartArmER", opacity: 0) // hide alternative position armR
+        live2DModel.setPartsOpacity("PartWatchB", opacity: 0) // hide watch
 
         live2DModel.update()
         live2DModel.draw()

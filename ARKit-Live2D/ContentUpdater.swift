@@ -62,18 +62,18 @@ class ContentUpdater: NSObject, ARSCNViewDelegate {
         
         let c = faceAnchor.transform.columns
 
-        live2DModel.setParam("PARAM_ANGLE_Z", value: (CGFloat)(atan2f(c.1.x, c.1.y) * 180 / Float.pi))
+        live2DModel.setParam("ParamAngleZ", value: (CGFloat)(atan2f(c.1.x, c.1.y) * 180 / Float.pi))
 
-        live2DModel.setParam("PARAM_BROW_L_Y", value: -(CGFloat)(0.5 - browOuterUpLeft))
-        live2DModel.setParam("PARAM_BROW_R_Y", value: -(CGFloat)(0.5 - browOuterUpRight))
-        live2DModel.setParam("PARAM_BROW_L_ANGLE", value: 2*(CGFloat)(browInnerUp - browOuterUpLeft))
-        live2DModel.setParam("PARAM_BROW_R_ANGLE", value: 2*(CGFloat)(browInnerUp - browOuterUpRight))
+        live2DModel.setParam("ParamBrowLY", value: -(CGFloat)(0.5 - browOuterUpLeft))
+        live2DModel.setParam("ParamBrowRY", value: -(CGFloat)(0.5 - browOuterUpRight))
+        live2DModel.setParam("ParamBrowLAngle", value: 2*(CGFloat)(browInnerUp - browOuterUpLeft))
+        live2DModel.setParam("ParamBrowRAngle", value: 2*(CGFloat)(browInnerUp - browOuterUpRight))
 
-        live2DModel.setParam("PARAM_EYE_L_OPEN", value: (CGFloat)(1.0 - eyeBlinkLeft))
-        live2DModel.setParam("PARAM_EYE_R_OPEN", value: (CGFloat)(1.0 - eyeBlinkRight))
+        live2DModel.setParam("ParamEyeLOpen", value: (CGFloat)(1.0 - eyeBlinkLeft))
+        live2DModel.setParam("ParamEyeROpen", value: (CGFloat)(1.0 - eyeBlinkRight))
         
-        live2DModel.setParam("PARAM_MOUTH_OPEN_Y", value: (CGFloat)(jawOpen*1.8))
-        live2DModel.setParam("PARAM_MOUTH_FORM", value: (CGFloat)(1 - mouthFunnel*2))
+        live2DModel.setParam("ParamMouthOpenY", value: (CGFloat)(jawOpen*1.8))
+        live2DModel.setParam("ParamMouthForm", value: (CGFloat)(1 - mouthFunnel*2))
 
     }
 }
