@@ -45,8 +45,9 @@
 		287E5EA023FE5E4300872E43 /* CubismPhysicsJson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287E5E7223FE5E4200872E43 /* CubismPhysicsJson.cpp */; };
 		287E5EA123FE5E4300872E43 /* CubismPhysics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287E5E7323FE5E4200872E43 /* CubismPhysics.cpp */; };
 		287E5EA3240291BE00872E43 /* libCubismNativeFramework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 287E5DE923FE5C8000872E43 /* libCubismNativeFramework.a */; };
-		287E5EAC2402AFB600872E43 /* texture_00.png in Resources */ = {isa = PBXBuildFile; fileRef = 287E5EAA2402AFB600872E43 /* texture_00.png */; };
-		287E5EAD2402AFB600872E43 /* natori_pro_t03.moc3 in Resources */ = {isa = PBXBuildFile; fileRef = 287E5EAB2402AFB600872E43 /* natori_pro_t03.moc3 */; };
+		287E5EB22402CC2200872E43 /* hiyori_pro_t08.moc3 in Resources */ = {isa = PBXBuildFile; fileRef = 287E5EAE2402CC2200872E43 /* hiyori_pro_t08.moc3 */; };
+		287E5EB32402CC2200872E43 /* texture_00.png in Resources */ = {isa = PBXBuildFile; fileRef = 287E5EB02402CC2200872E43 /* texture_00.png */; };
+		287E5EB42402CC2200872E43 /* texture_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 287E5EB12402CC2200872E43 /* texture_01.png */; };
 		9E33220A1FBA0B2A00E186AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322091FBA0B2A00E186AF /* AppDelegate.swift */; };
 		9E33220C1FBA0B2A00E186AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E33220B1FBA0B2A00E186AF /* ViewController.swift */; };
 		9E33220F1FBA0B2A00E186AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E33220D1FBA0B2A00E186AF /* Main.storyboard */; };
@@ -205,8 +206,9 @@
 		287E5E7223FE5E4200872E43 /* CubismPhysicsJson.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CubismPhysicsJson.cpp; sourceTree = "<group>"; };
 		287E5E7323FE5E4200872E43 /* CubismPhysics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CubismPhysics.cpp; sourceTree = "<group>"; };
 		287E5E7423FE5E4200872E43 /* CubismFramework.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CubismFramework.hpp; sourceTree = "<group>"; };
-		287E5EAA2402AFB600872E43 /* texture_00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_00.png; sourceTree = "<group>"; };
-		287E5EAB2402AFB600872E43 /* natori_pro_t03.moc3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = natori_pro_t03.moc3; sourceTree = "<group>"; };
+		287E5EAE2402CC2200872E43 /* hiyori_pro_t08.moc3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = hiyori_pro_t08.moc3; sourceTree = "<group>"; };
+		287E5EB02402CC2200872E43 /* texture_00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_00.png; sourceTree = "<group>"; };
+		287E5EB12402CC2200872E43 /* texture_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_01.png; sourceTree = "<group>"; };
 		9E3322061FBA0B2A00E186AF /* ARKit-Live2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ARKit-Live2D.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E3322091FBA0B2A00E186AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E33220B1FBA0B2A00E186AF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -494,12 +496,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		287E5EA92402AFB600872E43 /* natori_pro_t03.4096 */ = {
+		287E5EAF2402CC2200872E43 /* hiyori_pro_t08.2048 */ = {
 			isa = PBXGroup;
 			children = (
-				287E5EAA2402AFB600872E43 /* texture_00.png */,
+				287E5EB02402CC2200872E43 /* texture_00.png */,
+				287E5EB12402CC2200872E43 /* texture_01.png */,
 			);
-			path = natori_pro_t03.4096;
+			path = hiyori_pro_t08.2048;
 			sourceTree = "<group>";
 		};
 		9E3321FD1FBA0B2A00E186AF = {
@@ -537,8 +540,8 @@
 				9E3322371FBA0CAE00E186AF /* ContentUpdater.swift */,
 				9E33220D1FBA0B2A00E186AF /* Main.storyboard */,
 				9E3322101FBA0B2A00E186AF /* Assets.xcassets */,
-				287E5EA92402AFB600872E43 /* natori_pro_t03.4096 */,
-				287E5EAB2402AFB600872E43 /* natori_pro_t03.moc3 */,
+				287E5EAF2402CC2200872E43 /* hiyori_pro_t08.2048 */,
+				287E5EAE2402CC2200872E43 /* hiyori_pro_t08.moc3 */,
 				9E3322121FBA0B2A00E186AF /* LaunchScreen.storyboard */,
 				9E3322151FBA0B2A00E186AF /* Info.plist */,
 			);
@@ -696,9 +699,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E3322141FBA0B2A00E186AF /* LaunchScreen.storyboard in Resources */,
-				287E5EAD2402AFB600872E43 /* natori_pro_t03.moc3 in Resources */,
-				287E5EAC2402AFB600872E43 /* texture_00.png in Resources */,
+				287E5EB32402CC2200872E43 /* texture_00.png in Resources */,
 				9E3322111FBA0B2A00E186AF /* Assets.xcassets in Resources */,
+				287E5EB22402CC2200872E43 /* hiyori_pro_t08.moc3 in Resources */,
+				287E5EB42402CC2200872E43 /* texture_01.png in Resources */,
 				9E33220F1FBA0B2A00E186AF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
