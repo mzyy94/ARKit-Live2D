@@ -196,8 +196,8 @@ class ViewController: GLKViewController {
         
         Live2DCubism.initL2D()
         
-        let modelFile = "hiyori_pro_t08"
-        let textures = ["texture_00", "texture_01"]
+        let modelFile = "hiyori_movie_pro_t01"
+        let textures = ["texture_00"]
         
         guard let modelPath = Bundle.main.path(forResource: modelFile, ofType: "moc3") else {
             print("Failed to find model file")
