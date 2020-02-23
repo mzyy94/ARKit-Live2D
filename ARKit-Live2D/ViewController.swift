@@ -118,7 +118,7 @@ class ViewController: GLKViewController {
             errorWithInfo.localizedFailureReason,
             errorWithInfo.localizedRecoverySuggestion
         ]
-        let errorMessage = messages.flatMap({ $0 }).joined(separator: "\n")
+        let errorMessage = messages.compactMap({ $0 }).joined(separator: "\n")
         return errorMessage
     }
     
@@ -273,7 +273,7 @@ extension ViewController: ARSessionDelegate {
             errorWithInfo.localizedFailureReason,
             errorWithInfo.localizedRecoverySuggestion
         ]
-        let errorMessage = messages.flatMap({ $0 }).joined(separator: "\n")
+        let errorMessage = messages.compactMap({ $0 }).joined(separator: "\n")
         
         DispatchQueue.main.async {
             print("The AR session failed. ::" + errorMessage)
