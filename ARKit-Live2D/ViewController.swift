@@ -230,10 +230,10 @@ class ViewController: GLKViewController {
         
         let size = UIScreen.main.bounds.size
         
-        let scx: Float = (Float)(5.6 / live2DModel.getCanvasWidth())
-        let scy: Float = (Float)(-5.6 / live2DModel.getCanvasWidth() * (Float)(size.width/size.height))
-        let x: Float = -2.8
-        let y: Float = 1
+        let scx: Float = (Float)(3.6 / live2DModel.getCanvasWidth())
+        let scy: Float = (Float)(3.6 / live2DModel.getCanvasWidth() * (Float)(size.width/size.height))
+        let x: Float = 0
+        let y: Float = -0.5
         
         let matrix4 = SCNMatrix4(
             m11: scx, m12: 0,   m13: 0, m14: 0,
