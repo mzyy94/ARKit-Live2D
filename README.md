@@ -6,24 +6,26 @@ Live2D face motion control with ARKit face tracking sample
 ## Implementations
 
 - iPhone X ARKit Face tracking
-- Live2D Cubism Face motion control
+- Live2D Cubism 4.0 Face motion control
 - ReplayKit Live broadcasting
 
 ## Requirements
 
-- iPhone X (Actual one, not simulator)
-  - iOS 11.1 or higher version
-- Xcode 9.1
+- [iPhone and iPad models that support Face ID](https://support.apple.com/HT209183)
+  - iOS 13.2 or higher version
+- Xcode 11.3
 
 ## Preparation
 
-0. Clone or download this repository.
+0. Clone this repository with `--recursive`.
 1. Get Live2D Cubism SDK 2 from [here](https://www.live2d.com/download/cubism-sdk/download-native/). **Tested version: Cubism 4 SDK for Native R1**
 2. Unarchive the sdk and put *include* and *lib* directories into root directory of this repository.
 
 ## Build
 
-Set code signing team and build simply.
+1. Build **CubismNativeFramework** first.
+2. Set code signing team.
+3. Build App.
 
 ## License
 
