@@ -249,7 +249,9 @@ class ViewController: GLKViewController {
         
         let delta = updateFrame()
         live2DModel.updatePhysics(Float(delta))
-        
+                
+        live2DModel.setParam("ParamBreath", value: Float32((cos(lastFrame) + 1.0) / 2.0))
+
         live2DModel.update()
         live2DModel.draw()
     }
