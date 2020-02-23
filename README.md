@@ -18,10 +18,10 @@ Live2D face motion control with ARKit face tracking sample
 ## Preparation
 
 0. Clone or download this repository.
-1. Get Live2D Cubism SDK 2 from [here](http://sites.cybernoids.jp/cubism-sdk2/opengl2-1). **Recommended version: 2.1.04_1**
+1. Get Live2D Cubism SDK 2 from [here](https://www.live2d.com/download/cubism-sdk/download-native/). **Tested version: Cubism 4 SDK for Native R1**
 2. Unarchive the sdk and put *include* and *lib* directories into root directory of this repository.
-3. Get haru model from [here](http://sites.cybernoids.jp/cubism2/samples)
-4. Unarchive the model archive and put *haru.moc* file and *haru.1024* directory into source root directory (ARKit-Live2D).
+3. Get natori_pro model from [here](https://www.live2d.com/download/sample-data/)
+4. Unarchive the model archive and put *natori_pro_t03.moc3* file and *natori_pro_t03.4096* directory into source root directory (ARKit-Live2D).
 
 ## Build
 
