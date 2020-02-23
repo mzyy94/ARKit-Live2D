@@ -41,7 +41,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <SceneKit/SceneKit.h>
 
-@interface Live2D : NSObject
+@interface Live2DCubism : NSObject
 + (void)initL2D;
 + (void)dispose;
 + (NSString *)live2DVersion;

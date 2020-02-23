@@ -194,7 +194,7 @@ class ViewController: GLKViewController {
     func setupGL() {
         EAGLContext.setCurrent(self.context)
         
-        Live2D.initL2D()
+        Live2DCubism.initL2D()
         
         let modelFile = "haru"
         let textures = ["texture_00", "texture_01", "texture_02"]
@@ -218,7 +218,7 @@ class ViewController: GLKViewController {
     
     func tearDownGL() {
         live2DModel = nil
-        Live2D.dispose()
+        Live2DCubism.dispose()
         EAGLContext.setCurrent(self.context)
     }
     

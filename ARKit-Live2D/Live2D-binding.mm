@@ -42,9 +42,9 @@
 #import "Live2DModelOpenGL.h"
 #import "UtSystem.h"
 
-#pragma mark - Live2D class
+#pragma mark - Live2DCubism class
 
-@implementation Live2D
+@implementation Live2DCubism
 + (void)initL2D {
     live2d::Live2D::init();
 }
