@@ -212,23 +212,11 @@ class ViewController: GLKViewController {
             let textureInfo = try! GLKTextureLoader.texture(withContentsOfFile: filePath, options: [GLKTextureLoaderApplyPremultiplication: false, GLKTextureLoaderGenerateMipmaps: true])
             
             let num = textureInfo.name
-            live2DModel?.setTexture(Int32(index), to: num)
+            live2DModel.setTexture(Int32(index), to: num)
         }
         
-        live2DModel?.setPremultipliedAlpha(true);
-    }
-    
-    func tearDownGL() {
-        live2DModel = nil
-        Live2DCubism.dispose()
-        EAGLContext.setCurrent(self.context)
-    }
-    
-    // MARK: - GLKViewDelegate
-    
-    override func glkView(_ view: GLKView, drawIn rect: CGRect) {
-        glClearColor(0.65, 0.65, 0.65, 1.0)
-        glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
+        live2DModel.setPremultipliedAlpha(true);
+        live2DModel.setPartsOpacity("PartArmB", opacity: 0) // hide alternative position arm
         
         let size = UIScreen.main.bounds.size
         
@@ -243,15 +231,20 @@ class ViewController: GLKViewController {
             m31: 0,   m32: 0,   m33: 1, m34: 0,
             m41: x,   m42: y,   m43: 0, m44: 1)
         live2DModel.setMatrix(matrix4)
+    }
+    
+    func tearDownGL() {
+        live2DModel = nil
+        Live2DCubism.dispose()
+        EAGLContext.setCurrent(self.context)
+    }
+    
+    // MARK: - GLKViewDelegate
+    
+    override func glkView(_ view: GLKView, drawIn rect: CGRect) {
+        glClearColor(0.65, 0.65, 0.65, 1.0)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
         
-        let t = UtSystem.getUserTimeMSec() / 1000.0
-        
-        live2DModel.setParam("ParamBodyAngleZ", value: Float32(10.0 * sin(t)))
-        live2DModel.setParam("ParamHairFront", value: Float32(sin(t)))
-        live2DModel.setParam("ParamHairBack", value: Float32(sin(t)))
-        live2DModel.setParam("ParamBreath", value: Float32((cos(t) + 1.0) / 2.0))
-        live2DModel.setPartsOpacity("PartArmB", opacity: 0) // hide alternative position arm
-
         live2DModel.update()
         live2DModel.draw()
     }
