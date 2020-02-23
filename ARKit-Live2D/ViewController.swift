@@ -197,7 +197,6 @@ class ViewController: GLKViewController {
         Live2DCubism.initL2D()
         
         let jsonFile = "hiyori_movie_pro_t01.model3"
-        let textures = ["texture_00"]
         
         guard let jsonPath = Bundle.main.path(forResource: jsonFile, ofType: "json") else {
             print("Failed to find model json file")
@@ -207,8 +206,9 @@ class ViewController: GLKViewController {
         live2DModel = Live2DModelOpenGL(jsonPath: jsonPath)
         contentUpdater.live2DModel = live2DModel
         
-        for (index, texture) in textures.enumerated() {
-            let filePath = Bundle.main.path(forResource: texture, ofType: "png")!
+        for index in 0..<live2DModel.getNumberOfTextures() {
+            let fileName = live2DModel.getFileName(ofTexture: index)!;
+            let filePath = Bundle.main.path(forResource: fileName, ofType: nil)!
             let textureInfo = try! GLKTextureLoader.texture(withContentsOfFile: filePath, options: [GLKTextureLoaderApplyPremultiplication: false, GLKTextureLoaderGenerateMipmaps: true])
             
             let num = textureInfo.name
@@ -216,7 +216,6 @@ class ViewController: GLKViewController {
         }
         
         live2DModel.setPremultipliedAlpha(true);
-        live2DModel.setPartsOpacity("PartArmB", opacity: 0) // hide alternative position arm
         
         let size = UIScreen.main.bounds.size
         

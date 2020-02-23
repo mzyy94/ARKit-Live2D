@@ -146,6 +146,16 @@ static Allocator _allocator;
     return self;
 }
 
+- (int)getNumberOfTextures {
+    return _modelSetting->GetTextureCount();
+}
+
+- (NSString *)getFileNameOfTexture:(int)number {
+    NSString* fileName = [NSString stringWithUTF8String:_modelSetting->GetTextureFileName(number)];
+    NSURL *url = [NSURL URLWithString:fileName relativeToURL:_baseUrl];
+    return [url lastPathComponent];
+}
+
 - (void)setTexture:(int)textureNo to:(uint32_t)openGLTextureNo {
     _userModel->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->BindTexture(textureNo, openGLTextureNo);
 }
