@@ -250,11 +250,7 @@ class ViewController: GLKViewController {
         live2DModel.setParam("ParamHairFront", value: (CGFloat)(sin(t)))
         live2DModel.setParam("ParamHairBack", value: (CGFloat)(sin(t)))
         live2DModel.setParam("ParamBreath", value: (CGFloat)((cos(t) + 1.0) / 2.0))
-        live2DModel.setPartsOpacity("PartArmCL", opacity: 0) // hide alternative position armL
-        live2DModel.setPartsOpacity("PartArmDL", opacity: 0) // hide alternative position armL
-        live2DModel.setPartsOpacity("PartArmBR", opacity: 0) // hide alternative position armR
-        live2DModel.setPartsOpacity("PartArmER", opacity: 0) // hide alternative position armR
-        live2DModel.setPartsOpacity("PartWatchB", opacity: 0) // hide watch
+        live2DModel.setPartsOpacity("PartArmB", opacity: 0) // hide alternative position arm
 
         live2DModel.update()
         live2DModel.draw()
