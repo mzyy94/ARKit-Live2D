@@ -60,9 +60,13 @@ class ContentUpdater: NSObject, ARSCNViewDelegate {
             let jawOpen = faceAnchor.blendShapes[.jawOpen] as? Float
             else { return }
         
-        let c = faceAnchor.transform.columns
-
-        live2DModel.setParam("ParamAngleZ", value: atan2f(c.1.x, c.1.y) * 180 / Float.pi)
+        let newFaceMatrix = SCNMatrix4.init(faceAnchor.transform)
+        let faceNode = SCNNode()
+        faceNode.transform = newFaceMatrix
+        
+        live2DModel.setParam("ParamAngleY", value: faceNode.eulerAngles.x * -360 / Float.pi)
+        live2DModel.setParam("ParamAngleX", value: faceNode.eulerAngles.y * 360 / Float.pi)
+        live2DModel.setParam("ParamAngleZ", value: faceNode.eulerAngles.z * -360 / Float.pi)
 
         live2DModel.setParam("ParamEyeBallX", value: faceAnchor.lookAtPoint.x * 2)
         live2DModel.setParam("ParamEyeBallY", value: faceAnchor.lookAtPoint.y * 2)
