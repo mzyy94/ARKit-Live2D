@@ -163,7 +163,7 @@ static Allocator _allocator;
 
 - (void)setParam:(NSString *)paramId value:(Float32)value {
     const auto cid = CubismFramework::GetIdManager()->GetId((const char*)[paramId UTF8String]);
-    _userModel->GetModel()->AddParameterValue(cid, value);
+    _userModel->GetModel()->SetParameterValue(cid, value);
 }
 
 - (void)setPartsOpacity:(NSString *)paramId opacity:(Float32)value {
