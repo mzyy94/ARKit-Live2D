@@ -135,7 +135,7 @@ class ViewController: GLKViewController {
     
     // MARK: - Gesture action
 
-    @IBAction func tapInfoButton() {
+    @IBAction func tapInfoButton(_ sender: UIButton) {
         let liveBroadcast = UIAlertAction(title: controller.isBroadcasting ? "Stop Broadcast" : "Live Broadcast", style: .default, handler: { action in
             if self.controller.isBroadcasting {
                 self.stopBroadcast()
@@ -153,6 +153,8 @@ class ViewController: GLKViewController {
         actionSheet.addAction(toggleSceneView)
 
         actionSheet.addAction(UIAlertAction(title: "Cacnel", style: .cancel, handler: nil))
+        
+        actionSheet.popoverPresentationController?.sourceView = sender
         
         self.show(actionSheet, sender: self)
     }
