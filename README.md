@@ -23,14 +23,18 @@ Live2D face motion control with ARKit face tracking sample
 
 ## Build
 
-1. Build **CubismNativeFramework** first.
-2. Set code signing team.
-3. Build App.
+1. Set code signing team.
+2. Build App.
 
 ## License
 
 ### Source Code
 [Modified BSD 3-clause License](LICENSE)
+
+### Cubism Native Framewoork
+
+* [Live2D Open Software License Agreement](https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html)
+* [Live2D Open Software 使用許諾契約書](https://www.live2d.com/eula/live2d-open-software-license-agreement_jp.html)
 
 ### Model Data
 
