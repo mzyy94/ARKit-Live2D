@@ -148,9 +148,14 @@ class ViewController: GLKViewController {
             self.sceneView.isHidden = !self.sceneView.isHidden
         })
         
+        let setting = UIAlertAction(title: "Setting", style: .default, handler: { action in
+            self.present(SettingController(), animated: true, completion: nil)
+        })
+        
         let actionSheet = UIAlertController(title: "Option", message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(liveBroadcast)
         actionSheet.addAction(toggleSceneView)
+        actionSheet.addAction(setting)
 
         actionSheet.addAction(UIAlertAction(title: "Cacnel", style: .cancel, handler: nil))
         
