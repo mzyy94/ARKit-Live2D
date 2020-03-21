@@ -175,7 +175,7 @@ class SettingController: UIViewController {
     
     fileprivate let resetButton: UIButton = {
         let button = UIButton()
-        button.setTitle("RESTORE DEFAULT", for: .normal)
+        button.setTitle("Restore Default", for: .normal)
         button.addTarget(self, action: #selector(handleDefault), for: .touchUpInside)
         return button
     }()
@@ -202,32 +202,28 @@ class SettingController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(setBackgroundColorButton)
-        
-        setBackgroundColorButton.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 100, left: 16, bottom: 0, right: 16), size: .init())
-        
-        view.addSubview(zoomTitleLabel)
-        zoomTitleLabel.anchor(top: setBackgroundColorButton.bottomAnchor, leading: setBackgroundColorButton.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 24, left: 18, bottom: 0, right: 18))
-        
-        view.addSubview(setZoomSlider)
-        setZoomSlider.anchor(top: setBackgroundColorButton.bottomAnchor, leading: zoomTitleLabel.trailingAnchor, bottom: nil, trailing: setBackgroundColorButton.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 18))
-        
-        view.addSubview(yPosLabel)
-        yPosLabel.anchor(top: zoomTitleLabel.bottomAnchor, leading: zoomTitleLabel.leadingAnchor, bottom: nil, trailing: zoomTitleLabel.trailingAnchor, padding: .init(top: 24, left: 0, bottom: 0, right: 18))
-        
-        view.addSubview(setYPositionSlider)
-        setYPositionSlider.anchor(top: setZoomSlider.bottomAnchor, leading: setZoomSlider.leadingAnchor, bottom: nil, trailing: setZoomSlider.trailingAnchor, padding: .init(top: 16, left: 0, bottom: 0, right: 0))
-        
-        
-        view.addSubview(xPosLabel)
-        xPosLabel.anchor(top: yPosLabel.bottomAnchor, leading: yPosLabel.leadingAnchor, bottom: nil, trailing: yPosLabel.trailingAnchor, padding: .init(top: 24, left: 0, bottom: 0, right: 18))
-        
-        view.addSubview(setXPositionSlider)
-        setXPositionSlider.anchor(top: setYPositionSlider.bottomAnchor, leading: setYPositionSlider.leadingAnchor, bottom: nil, trailing: setYPositionSlider.trailingAnchor, padding: .init(top: 14, left: 0, bottom: 0, right: 0))
-        
         updateInfo()
-        view.addSubview(infoTextView)
-        infoTextView.anchor(top: xPosLabel.bottomAnchor, leading: setBackgroundColorButton.leadingAnchor, bottom: nil, trailing: setBackgroundColorButton.trailingAnchor, size: .init(width: 0, height: 100))
+        
+        let zoomStackView = UIStackView(arrangedSubviews: [zoomTitleLabel, setZoomSlider])
+        zoomStackView.axis = .horizontal
+        zoomStackView.spacing = 8
+        
+        let yPosStackView = UIStackView(arrangedSubviews: [yPosLabel, setYPositionSlider])
+        yPosStackView.axis = .horizontal
+        yPosStackView.spacing = 8
+        
+        let xPosStackView = UIStackView(arrangedSubviews: [xPosLabel, setXPositionSlider])
+        xPosStackView.axis = .horizontal
+        xPosStackView.spacing = 8
+        
+        let mainStackView = UIStackView(arrangedSubviews: [setBackgroundColorButton, zoomStackView, yPosStackView, xPosStackView, infoTextView])
+        mainStackView.axis = .vertical
+        mainStackView.spacing = 12
+        
+        view.addSubview(mainStackView)
+        mainStackView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 24, left: 24, bottom: 0, right: 24))
+        
+        
         
         view.addSubview(resetButton)
         resetButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 24, right: 0), size: .init(width: 100, height: 0))
