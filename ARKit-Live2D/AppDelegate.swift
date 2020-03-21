@@ -44,6 +44,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let defaults = UserDefaults.standard
+        let isNotFirstRun = defaults.bool(forKey: FIRST_RUN)
+        if (!isNotFirstRun) {
+            defaults.set(true, forKey: FIRST_RUN)
+            defaults.set(RED_COLOR_DEFAULT, forKey: RED_COLOR)
+            defaults.set(GREEN_COLOR_DEFAULT, forKey: GREEN_COLOR)
+            defaults.set(BLUE_COLOR_DEFAULT, forKey: BLUE_COLOR)
+            defaults.set(ZOOM_DEFAULT, forKey: ZOOM)
+            defaults.set(X_POS_DEFAULT, forKey: X_POS)
+            defaults.set(Y_POS_DEFAULT, forKey: Y_POS)
+        }
         return true
     }
 
