@@ -59,6 +59,9 @@
 		9E33222A1FBA0B2A00E186AF /* ARKit_Live2DUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322291FBA0B2A00E186AF /* ARKit_Live2DUITests.swift */; };
 		9E3322381FBA0CAE00E186AF /* ContentUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322371FBA0CAE00E186AF /* ContentUpdater.swift */; };
 		9E33229B1FBA38CB00E186AF /* Live2D-binding.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322941FBA38CA00E186AF /* Live2D-binding.mm */; };
+		C8F2F4162425EED7005F4D4F /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F2F4152425EED7005F4D4F /* SettingController.swift */; };
+		C8F2F4182425EF58005F4D4F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F2F4172425EF58005F4D4F /* Constants.swift */; };
+		C8F2F41A2425F0FE005F4D4F /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F2F4192425F0FE005F4D4F /* Extensions+UIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,6 +234,9 @@
 		9E3322961FBA38CA00E186AF /* Live2D-binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Live2D-binding.h"; sourceTree = "<group>"; };
 		9E33229A1FBA38CB00E186AF /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		9EE03DE01FBDF731004C3798 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C8F2F4152425EED7005F4D4F /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
+		C8F2F4172425EF58005F4D4F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C8F2F4192425F0FE005F4D4F /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -552,7 +558,10 @@
 				9E3322941FBA38CA00E186AF /* Live2D-binding.mm */,
 				9E3322091FBA0B2A00E186AF /* AppDelegate.swift */,
 				9E33220B1FBA0B2A00E186AF /* ViewController.swift */,
+				C8F2F4152425EED7005F4D4F /* SettingController.swift */,
+				C8F2F4192425F0FE005F4D4F /* Extensions+UIView.swift */,
 				9E3322371FBA0CAE00E186AF /* ContentUpdater.swift */,
+				C8F2F4172425EF58005F4D4F /* Constants.swift */,
 				9E33220D1FBA0B2A00E186AF /* Main.storyboard */,
 				9E3322101FBA0B2A00E186AF /* Assets.xcassets */,
 				287E5EB524030DC700872E43 /* hiyori_movie_pro_t01 */,
@@ -788,10 +797,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8F2F41A2425F0FE005F4D4F /* Extensions+UIView.swift in Sources */,
+				C8F2F4162425EED7005F4D4F /* SettingController.swift in Sources */,
 				9E3322381FBA0CAE00E186AF /* ContentUpdater.swift in Sources */,
 				9E33220C1FBA0B2A00E186AF /* ViewController.swift in Sources */,
 				9E33220A1FBA0B2A00E186AF /* AppDelegate.swift in Sources */,
 				9E33229B1FBA38CB00E186AF /* Live2D-binding.mm in Sources */,
+				C8F2F4182425EF58005F4D4F /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1011,6 +1023,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					L2D_TARGET_IPHONE_ES2,
 					"DEBUG=1",
@@ -1039,6 +1052,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					L2D_TARGET_IPHONE_ES2,
 					"GLES_SILENCE_DEPRECATION=1",

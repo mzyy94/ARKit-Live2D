@@ -148,9 +148,14 @@ class ViewController: GLKViewController {
             self.sceneView.isHidden = !self.sceneView.isHidden
         })
         
+        let setting = UIAlertAction(title: "Setting", style: .default, handler: { action in
+            self.present(SettingController(), animated: true, completion: nil)
+        })
+        
         let actionSheet = UIAlertController(title: "Option", message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(liveBroadcast)
         actionSheet.addAction(toggleSceneView)
+        actionSheet.addAction(setting)
 
         actionSheet.addAction(UIAlertAction(title: "Cacnel", style: .cancel, handler: nil))
         
@@ -193,7 +198,6 @@ class ViewController: GLKViewController {
     }
     
     // MARK: - Live2D OpenGL setup
-
     func setupGL() {
         EAGLContext.setCurrent(self.context)
         
@@ -220,12 +224,21 @@ class ViewController: GLKViewController {
         
         live2DModel.setPremultipliedAlpha(true);
         
-        let size = UIScreen.main.bounds.size
+        setupSizeAndPosition()
         
-        let scx: Float = (Float)(5.6 / live2DModel.getCanvasWidth())
-        let scy: Float = (Float)(5.6 / live2DModel.getCanvasWidth() * (Float)(size.width/size.height))
-        let x: Float = 0
-        let y: Float = -0.8
+        _ = updateFrame()
+    }
+    
+    fileprivate func setupSizeAndPosition() {
+        let size = UIScreen.main.bounds.size
+        let defaults = UserDefaults.standard
+        
+        let zoom: Float = defaults.float(forKey: ZOOM)
+        
+        let scx: Float = (Float)(5.6 / live2DModel.getCanvasWidth()) * zoom
+        let scy: Float = (Float)(5.6 / live2DModel.getCanvasWidth() * (Float)(size.width/size.height)) * zoom
+        let x: Float = defaults.float(forKey: X_POS)
+        let y: Float = defaults.float(forKey: Y_POS)
         
         let matrix4 = SCNMatrix4(
             m11: scx, m12: 0,   m13: 0, m14: 0,
@@ -233,8 +246,6 @@ class ViewController: GLKViewController {
             m31: 0,   m32: 0,   m33: 1, m34: 0,
             m41: x,   m42: y,   m43: 0, m44: 1)
         live2DModel.setMatrix(matrix4)
-        
-        _ = updateFrame()
     }
     
     func tearDownGL() {
@@ -246,7 +257,15 @@ class ViewController: GLKViewController {
     // MARK: - GLKViewDelegate
     
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
-        glClearColor(0.65, 0.65, 0.65, 1.0)
+        setupSizeAndPosition()
+        
+        var rgb:[Float] = [0.0, 0.0, 0.0]
+        let defaults = UserDefaults.standard
+        for i in 0...2 {
+            rgb[i] = defaults.float(forKey: colorKeys[i])
+        }
+        
+        glClearColor(rgb[0], rgb[1], rgb[2], 1.0)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
         
         let delta = updateFrame()
