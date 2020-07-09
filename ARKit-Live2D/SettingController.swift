@@ -226,10 +226,17 @@ class SettingController: UIViewController {
         mainStackView.spacing = 12
 
         view.addSubview(mainStackView)
-        mainStackView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 24, left: 24, bottom: 0, right: 24))
+        mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        mainStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 24.0).isActive = true
+        mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24.0).isActive = true
+        mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24.0).isActive = true
 
         view.addSubview(resetButton)
-        resetButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 24, right: 0), size: .init(width: 100, height: 0))
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        resetButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24.0).isActive = true
+        resetButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0.0).isActive = true
+        resetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0).isActive = true
+        resetButton.widthAnchor.constraint(equalToConstant: 100.0).isActive = true
     }
 
     fileprivate func displayAlert(alertTitle title: String, alertMessage msg: String) {

@@ -61,7 +61,6 @@
 		9E33229B1FBA38CB00E186AF /* Live2D-binding.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322941FBA38CA00E186AF /* Live2D-binding.mm */; };
 		C8F2F4162425EED7005F4D4F /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F2F4152425EED7005F4D4F /* SettingController.swift */; };
 		C8F2F4182425EF58005F4D4F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F2F4172425EF58005F4D4F /* Constants.swift */; };
-		C8F2F41A2425F0FE005F4D4F /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F2F4192425F0FE005F4D4F /* Extensions+UIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -236,7 +235,6 @@
 		9EE03DE01FBDF731004C3798 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C8F2F4152425EED7005F4D4F /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		C8F2F4172425EF58005F4D4F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		C8F2F4192425F0FE005F4D4F /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -559,7 +557,6 @@
 				9E3322091FBA0B2A00E186AF /* AppDelegate.swift */,
 				9E33220B1FBA0B2A00E186AF /* ViewController.swift */,
 				C8F2F4152425EED7005F4D4F /* SettingController.swift */,
-				C8F2F4192425F0FE005F4D4F /* Extensions+UIView.swift */,
 				9E3322371FBA0CAE00E186AF /* ContentUpdater.swift */,
 				C8F2F4172425EF58005F4D4F /* Constants.swift */,
 				9E33220D1FBA0B2A00E186AF /* Main.storyboard */,
@@ -797,7 +794,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8F2F41A2425F0FE005F4D4F /* Extensions+UIView.swift in Sources */,
 				C8F2F4162425EED7005F4D4F /* SettingController.swift in Sources */,
 				9E3322381FBA0CAE00E186AF /* ContentUpdater.swift in Sources */,
 				9E33220C1FBA0B2A00E186AF /* ViewController.swift in Sources */,
