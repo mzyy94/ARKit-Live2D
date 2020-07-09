@@ -1,10 +1,16 @@
-//
-//  ARKit_Live2DTests.swift
-//  ARKit-Live2DTests
-//
-//  Created by Yuki MIZUNO on 2017/11/14.
-//  Copyright © 2017年 Yuki MIZUNO. All rights reserved.
-//
+/**
+ *
+ * ARKit_Live2DTests.swift
+ * ARKit-Live2DTests
+ * Created by Yuki MIZUNO on 2017/11/14.
+ *
+ * Copyright (c) 2017, Yuki MIZUNO
+ * All rights reserved.
+ *
+ * See LICENSE for license information
+ *
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
 
 @testable import ARKit_Live2D
 import XCTest
