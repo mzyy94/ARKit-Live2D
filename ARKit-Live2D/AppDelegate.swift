@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let defaults = UserDefaults.standard
         let isNotFirstRun = defaults.bool(forKey: FIRST_RUN)
-        if (!isNotFirstRun) {
+        if !isNotFirstRun {
             defaults.set(true, forKey: FIRST_RUN)
             defaults.set(RED_COLOR_DEFAULT, forKey: RED_COLOR)
             defaults.set(GREEN_COLOR_DEFAULT, forKey: GREEN_COLOR)

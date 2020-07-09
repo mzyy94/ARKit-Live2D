@@ -15,39 +15,38 @@
 import UIKit
 
 class SettingController: UIViewController {
-    
     fileprivate let setBackgroundColorButton: UIButton = {
         let button = UIButton()
         button.setTitle("Change Background Color", for: .normal)
         button.addTarget(self, action: #selector(handleChangeColor), for: .touchUpInside)
         return button
     }()
-    
+
     @objc fileprivate func handleChangeColor() {
         let defaults = UserDefaults.standard
         let alert = UIAlertController(title: "Enter Color Here", message: "RGB value are ranged [0, 255]", preferredStyle: .alert)
-        alert.addTextField { (textField) in
+        alert.addTextField { textField in
             textField.placeholder = "R value here"
             textField.text = "\(Int(defaults.float(forKey: RED_COLOR) * 255))"
             textField.keyboardType = .numberPad
         }
-        alert.addTextField { (textField) in
+        alert.addTextField { textField in
             textField.placeholder = "G value here"
             textField.text = "\(Int(defaults.float(forKey: GREEN_COLOR) * 255))"
             textField.keyboardType = .numberPad
         }
-        alert.addTextField { (textField) in
+        alert.addTextField { textField in
             textField.placeholder = "B value here"
             textField.text = "\(Int(defaults.float(forKey: BLUE_COLOR) * 255))"
             textField.keyboardType = .numberPad
         }
-        
+
         guard let colorTextFields = alert.textFields else {
             fatalError("Fatal Error")
         }
-        
-        alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { (alert) in
-            var rgb:[Float] = [1/255, 1/255, 1/255]
+
+        alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { _ in
+            var rgb: [Float] = [1 / 255, 1 / 255, 1 / 255]
             for tf in colorTextFields {
                 guard let text = tf.text else {
                     self.displayAlert(alertTitle: "Error", alertMessage: "Try again")
@@ -57,9 +56,9 @@ class SettingController: UIViewController {
                     self.displayAlert(alertTitle: "Error", alertMessage: "Please fill all fields")
                 }
                 let numberOnly = CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: text))
-                
+
                 if numberOnly {
-                    guard let number:Float = Float(text) else {
+                    guard let number: Float = Float(text) else {
                         fatalError("Fatal Error")
                     }
                     if !self.checkRange(value: number) {
@@ -75,26 +74,26 @@ class SettingController: UIViewController {
                     self.displayAlert(alertTitle: "Error", alertMessage: "Please enter number only")
                 }
             }
-            for i in 0...2 {
+            for i in 0 ... 2 {
                 defaults.set(rgb[i], forKey: colorKeys[i])
             }
             self.updateInfo()
         }))
-        
+
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
-    
+
     fileprivate func checkRange(value: Float) -> Bool {
         return (value >= 0 && value <= 255)
     }
-    
+
     fileprivate let zoomTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Zoom"
         return label
     }()
-    
+
     // default = 1 / 1.3
     fileprivate let setZoomSlider: UISlider = {
         let defaults = UserDefaults.standard
@@ -105,13 +104,13 @@ class SettingController: UIViewController {
         slider.addTarget(self, action: #selector(handleSlideZoom), for: .valueChanged)
         return slider
     }()
-    
+
     @objc fileprivate func handleSlideZoom() {
         let defaults = UserDefaults.standard
         defaults.set(setZoomSlider.value, forKey: ZOOM)
         updateInfo()
     }
-    
+
     fileprivate let setYPositionSlider: UISlider = {
         let defaults = UserDefaults.standard
         let slider = UISlider()
@@ -121,19 +120,19 @@ class SettingController: UIViewController {
         slider.addTarget(self, action: #selector(handleYPos), for: .valueChanged)
         return slider
     }()
-    
+
     fileprivate let yPosLabel: UILabel = {
         let label = UILabel()
         label.text = "Y-Position"
         return label
     }()
-    
+
     @objc fileprivate func handleYPos() {
         let defaults = UserDefaults.standard
         defaults.set(setYPositionSlider.value, forKey: Y_POS)
         updateInfo()
     }
-    
+
     fileprivate let setXPositionSlider: UISlider = {
         let defaults = UserDefaults.standard
         let slider = UISlider()
@@ -143,19 +142,19 @@ class SettingController: UIViewController {
         slider.addTarget(self, action: #selector(handleXPos), for: .valueChanged)
         return slider
     }()
-    
+
     fileprivate let xPosLabel: UILabel = {
         let label = UILabel()
         label.text = "X-Position"
         return label
     }()
-    
+
     @objc fileprivate func handleXPos() {
         let defaults = UserDefaults.standard
         defaults.set(setXPositionSlider.value, forKey: X_POS)
         updateInfo()
     }
-    
+
     fileprivate let infoTextView: UITextView = {
         let tf = UITextView()
         tf.backgroundColor = .clear
@@ -163,7 +162,7 @@ class SettingController: UIViewController {
         tf.isScrollEnabled = false
         return tf
     }()
-    
+
     fileprivate func generateInfo() -> String {
         let defaults = UserDefaults.standard
         let r = defaults.float(forKey: RED_COLOR)
@@ -174,21 +173,21 @@ class SettingController: UIViewController {
         let x_pos = defaults.float(forKey: X_POS)
         return "R: \(r)\nG: \(g)\nB: \(b)\nZoom: \(zoom)\nY-Pos: \(y_pos)\nX-Pos: \(x_pos)\n"
     }
-    
+
     fileprivate func updateInfo() {
         infoTextView.text = generateInfo()
     }
-    
+
     fileprivate let resetButton: UIButton = {
         let button = UIButton()
         button.setTitle("Restore Default", for: .normal)
         button.addTarget(self, action: #selector(handleDefault), for: .touchUpInside)
         return button
     }()
-    
+
     @objc fileprivate func handleDefault() {
         let alert = UIAlertController(title: "Warning", message: "Are you sure you want to restore to default settings?", preferredStyle: .alert)
-        alert.addAction(.init(title: "Restore", style: .destructive, handler: { (alert) in
+        alert.addAction(.init(title: "Restore", style: .destructive, handler: { _ in
             let oldInfo = self.generateInfo()
             let pasteboard = UIPasteboard.general
             pasteboard.string = oldInfo
@@ -209,34 +208,31 @@ class SettingController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateInfo()
-        
+
         let zoomStackView = UIStackView(arrangedSubviews: [zoomTitleLabel, setZoomSlider])
         zoomStackView.axis = .horizontal
         zoomStackView.spacing = 8
-        
+
         let yPosStackView = UIStackView(arrangedSubviews: [yPosLabel, setYPositionSlider])
         yPosStackView.axis = .horizontal
         yPosStackView.spacing = 8
-        
+
         let xPosStackView = UIStackView(arrangedSubviews: [xPosLabel, setXPositionSlider])
         xPosStackView.axis = .horizontal
         xPosStackView.spacing = 8
-        
+
         let mainStackView = UIStackView(arrangedSubviews: [setBackgroundColorButton, zoomStackView, yPosStackView, xPosStackView, infoTextView])
         mainStackView.axis = .vertical
         mainStackView.spacing = 12
-        
+
         view.addSubview(mainStackView)
         mainStackView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 24, left: 24, bottom: 0, right: 24))
-        
-        
-        
+
         view.addSubview(resetButton)
         resetButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 24, right: 0), size: .init(width: 100, height: 0))
-
     }
 
-    fileprivate func displayAlert(alertTitle title:String ,alertMessage msg: String) {
+    fileprivate func displayAlert(alertTitle title: String, alertMessage msg: String) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
