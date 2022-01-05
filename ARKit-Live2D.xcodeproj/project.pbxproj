@@ -3980,7 +3980,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/CubismSdkForNative/Core/lib/ios/$(CONFIGURATION)-$(PLATFORM_NAME)\"";
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				OTHER_LDFLAGS = "-lLive2DCubismCore";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mzyy94.ARKit-Live2D";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4007,7 +4007,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/CubismSdkForNative/Core/lib/ios/$(CONFIGURATION)-$(PLATFORM_NAME)\"";
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				OTHER_LDFLAGS = "-lLive2DCubismCore";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mzyy94.ARKit-Live2D";
 				PRODUCT_NAME = "$(TARGET_NAME)";
