@@ -17,14 +17,14 @@ Live2D face motion control with ARKit face tracking sample
 
 ## Preparation
 
-0. Clone this repository with `--recursive`.
 1. Get Live2D Cubism SDK 2 from [here](https://www.live2d.com/download/cubism-sdk/download-native/). **Compatible version: Cubism 4 SDK for Native R4**
-2. Unarchive the sdk and find *include* and *lib* directories in *Core*, put them into root directory of this repository.
+2. Unarchive an SDK, rename the directory *CubismSdkForNative* and put it into root directory of this repository.
+
+![docs/directory.png](docs/directory.png)
 
 ## Build
 
-1. Set code signing team.
-2. Build.
+1. Build.
 
 ## License
 
