@@ -21,7 +21,7 @@
 #import "Model/CubismUserModel.hpp"
 #import "Rendering/OpenGL/CubismRenderer_OpenGLES2.hpp"
 #import "Id/CubismIdManager.hpp"
-#import "CubismPhysics.hpp"
+#import "Physics/CubismPhysics.hpp"
 
 using namespace Live2D::Cubism::Framework;
 using namespace Live2D::Cubism::Core;
