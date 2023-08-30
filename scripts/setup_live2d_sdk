@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+
+set -ue
+
+LIVE2D_VERSION=4-r.4
+
+SCRIPT_PATH=$(cd $(dirname $0) && pwd)
+
+cd $SCRIPT_PATH/..
+
+###################
+# Setup live2d #
+###################
+
+# Download and extract the archive.
+echo "- Setup live2d $LIVE2D_VERSION"
+echo 'Downloading...'
+curl -fsSL -o live2d.zip \
+  "https://cubism.live2d.com/sdk-native/bin/CubismSdkForNative-$LIVE2D_VERSION.zip"
+echo 'Extracting...'
+unzip -oq live2d.zip
+mv -f CubismSdkForNative-* CubismSdkForNative
+rm live2d.zip
