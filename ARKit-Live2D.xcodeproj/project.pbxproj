@@ -22,6 +22,10 @@
 		9E33222A1FBA0B2A00E186AF /* ARKit_Live2DUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322291FBA0B2A00E186AF /* ARKit_Live2DUITests.swift */; };
 		9E3322381FBA0CAE00E186AF /* ContentUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322371FBA0CAE00E186AF /* ContentUpdater.swift */; };
 		9E33229B1FBA38CB00E186AF /* Live2D-binding.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9E3322941FBA38CA00E186AF /* Live2D-binding.mm */; };
+		9E92755827860C5D00F82A91 /* CubismCommandBuffer_Metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4C6892785CE3E00E50D2D /* CubismCommandBuffer_Metal.mm */; };
+		9E92755927860C5D00F82A91 /* CubismOffscreenSurface_Metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4C68E2785CE3E00E50D2D /* CubismOffscreenSurface_Metal.mm */; };
+		9E92755A27860C5D00F82A91 /* CubismRenderer_Metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4C6912785CE3E00E50D2D /* CubismRenderer_Metal.mm */; };
+		9E92755B27860CAD00F82A91 /* CubismRenderingInstanceSingleton_Metal.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4C6902785CE3E00E50D2D /* CubismRenderingInstanceSingleton_Metal.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9EB4CA942785D10200E50D2D /* CubismFramework.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4C6372785CE3E00E50D2D /* CubismFramework.cpp */; };
 		9EB4CA952785D10200E50D2D /* CubismModelSettingJson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4C63B2785CE3E00E50D2D /* CubismModelSettingJson.cpp */; };
 		9EB4CA962785D10200E50D2D /* CubismPose.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4C63E2785CE3E00E50D2D /* CubismPose.cpp */; };
@@ -3700,6 +3704,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E92755B27860CAD00F82A91 /* CubismRenderingInstanceSingleton_Metal.m in Sources */,
+				9E92755827860C5D00F82A91 /* CubismCommandBuffer_Metal.mm in Sources */,
+				9E92755927860C5D00F82A91 /* CubismOffscreenSurface_Metal.mm in Sources */,
+				9E92755A27860C5D00F82A91 /* CubismRenderer_Metal.mm in Sources */,
 				9EB4CA942785D10200E50D2D /* CubismFramework.cpp in Sources */,
 				9EB4CA952785D10200E50D2D /* CubismModelSettingJson.cpp in Sources */,
 				9EB4CA962785D10200E50D2D /* CubismPose.cpp in Sources */,
@@ -3902,7 +3910,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -3955,7 +3963,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -3971,13 +3979,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BRLTQQGHEQ;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					L2D_TARGET_IPHONE_ES2,
-					"DEBUG=1",
+					L2D_TARGET_IPHONE,
 					"$(inherited)",
-					"GLES_SILENCE_DEPRECATION=1",
 				);
 				INFOPLIST_FILE = "ARKit-Live2D/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/CubismSdkForNative/Core/lib/ios/$(CONFIGURATION)-$(PLATFORM_NAME)\"";
 				MARKETING_VERSION = 2.2;
@@ -3999,12 +4005,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BRLTQQGHEQ;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					L2D_TARGET_IPHONE_ES2,
-					"GLES_SILENCE_DEPRECATION=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = L2D_TARGET_IPHONE;
 				INFOPLIST_FILE = "ARKit-Live2D/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/CubismSdkForNative/Core/lib/ios/$(CONFIGURATION)-$(PLATFORM_NAME)\"";
 				MARKETING_VERSION = 2.2;

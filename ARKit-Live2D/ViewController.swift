@@ -13,12 +13,12 @@
  */
 
 import ARKit
-import GLKit
+import Metal
 import ReplayKit
 import SceneKit
 import UIKit
 
-class ViewController: GLKViewController {
+class ViewController: UIViewController {
     // MARK: - Properties
 
     let contentUpdater = ContentUpdater()
@@ -28,8 +28,13 @@ class ViewController: GLKViewController {
         return sceneView.session
     }
 
-    var live2DModel: Live2DModelOpenGL!
-    var context: EAGLContext!
+    var live2DModel: Live2DModelMetal!
+    var device: MTLDevice! {
+        guard let shared = CubismRenderingInstanceSingleton_Metal.sharedManager() as? CubismRenderingInstanceSingleton_Metal else {
+            return nil
+        }
+        return shared.getMTLDevice()
+    }
     var lastFrame: TimeInterval = 0.0
 
     // MARK: - View Controller Life Cycle
@@ -41,19 +46,25 @@ class ViewController: GLKViewController {
         sceneView.session.delegate = self
         sceneView.automaticallyUpdatesLighting = true
 
-        context = EAGLContext(api: .openGLES2)
-        if context == nil {
-            print("Failed to create ES context")
+        guard let shared = CubismRenderingInstanceSingleton_Metal.sharedManager() as? CubismRenderingInstanceSingleton_Metal else {
+            print("Failed to cast CubismRenderingInstanceSingleton_Metal")
             return
         }
 
-        guard let view = self.view as? GLKView else {
-            print("Failed to cast view to GLKView")
-            return
-        }
-        view.context = context
+        let metalLayer = CAMetalLayer()
+        metalLayer.frame = view.frame
 
-        setupGL()
+        metalLayer.device = MTLCreateSystemDefaultDevice()
+        shared.setMTLDevice(metalLayer.device)
+
+        metalLayer.pixelFormat = .bgra8Unorm;
+        view.layer.addSublayer(metalLayer)
+        shared.setMetalLayer(metalLayer)
+
+        setupMetal()
+        
+        let link = CADisplayLink(target: self, selector: #selector(onDisplayLink))
+        link.add(to: .current, forMode: .default)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -65,12 +76,7 @@ class ViewController: GLKViewController {
 
         if isViewLoaded, view.window == nil {
             view = nil
-            tearDownGL()
-
-            if EAGLContext.current() == context {
-                EAGLContext.setCurrent(nil)
-            }
-            context = nil
+            tearDownMetal()
         }
     }
 
@@ -106,11 +112,7 @@ class ViewController: GLKViewController {
     // MARK: - Instance Life Cycle
 
     deinit {
-        self.tearDownGL()
-        if EAGLContext.current() == self.context {
-            EAGLContext.setCurrent(nil)
-        }
-        self.context = nil
+        self.tearDownMetal()
     }
 
     // MARK: - Gesture action
@@ -177,11 +179,9 @@ class ViewController: GLKViewController {
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
 
-    // MARK: - Live2D OpenGL setup
+    // MARK: - Live2D Metal setup
 
-    func setupGL() {
-        EAGLContext.setCurrent(context)
-
+    func setupMetal() {
         Live2DCubism.initL2D()
 
         let jsonFile = "hiyori_movie_pro_t01.model3"
@@ -191,16 +191,15 @@ class ViewController: GLKViewController {
             return
         }
 
-        live2DModel = Live2DModelOpenGL(jsonPath: jsonPath)
+        live2DModel = Live2DModelMetal(jsonPath: jsonPath)
         contentUpdater.live2DModel = live2DModel
 
         for index in 0 ..< live2DModel.getNumberOfTextures() {
             let fileName = live2DModel.getFileName(ofTexture: index)!
-            let filePath = Bundle.main.path(forResource: fileName, ofType: nil)!
-            let textureInfo = try! GLKTextureLoader.texture(withContentsOfFile: filePath, options: [GLKTextureLoaderApplyPremultiplication: false, GLKTextureLoaderGenerateMipmaps: true])
+            let fileURL = Bundle.main.url(forResource: fileName, withExtension: nil)!
+            let texture = try! MTKTextureLoader(device: device).newTexture(URL: fileURL, options: [ MTKTextureLoader.Option.generateMipmaps: true])
 
-            let num = textureInfo.name
-            live2DModel.setTexture(Int32(index), to: num)
+            live2DModel.setTexture(UInt32(index), textureId: texture)
         }
 
         live2DModel.setPremultipliedAlpha(true)
@@ -230,35 +229,34 @@ class ViewController: GLKViewController {
         live2DModel.setMatrix(matrix4)
     }
 
-    func tearDownGL() {
+    func tearDownMetal() {
         live2DModel = nil
         Live2DCubism.dispose()
-        EAGLContext.setCurrent(context)
     }
 
-    // MARK: - GLKViewDelegate
+    // MARK: - aaaaaaaa
+    @objc func onDisplayLink() {
+        autoreleasepool {
+            print("onDisplayLink")
+            setupSizeAndPosition()
 
-    override func glkView(_: GLKView, drawIn _: CGRect) {
-        setupSizeAndPosition()
+            var rgb: [Float] = [0.0, 0.0, 0.0]
+            let defaults = UserDefaults.standard
+            for i in 0 ... 2 {
+                rgb[i] = defaults.float(forKey: colorKeys[i])
+            }
 
-        var rgb: [Float] = [0.0, 0.0, 0.0]
-        let defaults = UserDefaults.standard
-        for i in 0 ... 2 {
-            rgb[i] = defaults.float(forKey: colorKeys[i])
+            let delta = updateFrame()
+            live2DModel.updatePhysics(Float(delta))
+
+            live2DModel.setParam("ParamBreath", value: Float32((cos(lastFrame) + 1.0) / 2.0))
+
+            live2DModel.update()
+            live2DModel.draw()
         }
-
-        glClearColor(rgb[0], rgb[1], rgb[2], 1.0)
-        glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
-
-        let delta = updateFrame()
-        live2DModel.updatePhysics(Float(delta))
-
-        live2DModel.setParam("ParamBreath", value: Float32((cos(lastFrame) + 1.0) / 2.0))
-
-        live2DModel.update()
-        live2DModel.draw()
     }
 
+    
     // MARK: - Frame Update
 
     func updateFrame() -> TimeInterval {

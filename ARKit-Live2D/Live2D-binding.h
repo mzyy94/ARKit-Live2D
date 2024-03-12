@@ -18,6 +18,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <SceneKit/SceneKit.h>
+#import "Rendering/Metal/CubismRenderingInstanceSingleton_Metal.h"
 
 @interface Live2DCubism : NSObject
 + (void)initL2D;
@@ -25,12 +26,12 @@
 + (NSString *)live2DVersion;
 @end
 
-@interface Live2DModelOpenGL : NSObject
+@interface Live2DModelMetal : NSObject
 
 - (instancetype)initWithJsonPath:(NSString *)jsonPath;
 - (int)getNumberOfTextures;
 - (NSString *)getFileNameOfTexture:(int)number;
-- (void)setTexture:(int)textureNo to:(uint32_t)openGLTextureNo;
+- (void)setTexture:(uint32_t)textureNo textureId:(id<MTLTexture>)textureId;
 - (void)setPremultipliedAlpha:(bool)enable;
 - (float)getCanvasWidth;
 - (void)setMatrix:(SCNMatrix4)matrix;

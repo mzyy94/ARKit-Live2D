@@ -19,7 +19,7 @@
 #import <SceneKit/SceneKit.h>
 #import "CubismModelSettingJson.hpp"
 #import "Model/CubismUserModel.hpp"
-#import "Rendering/OpenGL/CubismRenderer_OpenGLES2.hpp"
+#import "Rendering/Metal/CubismRenderer_Metal.hpp"
 #import "Id/CubismIdManager.hpp"
 #import "Physics/CubismPhysics.hpp"
 
@@ -95,9 +95,9 @@ static Allocator _allocator;
 }
 @end
 
-#pragma mark - Live2DModelOpenGL class
+#pragma mark - Live2DModelMetal class
 
-@interface Live2DModelOpenGL ()
+@interface Live2DModelMetal ()
 
 @property (nonatomic, assign) CubismUserModel *userModel;
 @property (nonatomic, assign) NSURL *baseUrl;
@@ -106,7 +106,7 @@ static Allocator _allocator;
 
 @end
 
-@implementation Live2DModelOpenGL
+@implementation Live2DModelMetal
 - (instancetype)initWithJsonPath:(NSString *)jsonPath {
     if (self = [super init]) {
         NSURL *url = [NSURL fileURLWithPath:jsonPath];
@@ -121,7 +121,7 @@ static Allocator _allocator;
         _userModel = new CubismUserModel();
         _userModel->LoadModel((const unsigned char *)[data bytes], (unsigned int)[data length]);
         _userModel->CreateRenderer();
-        _userModel->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->Initialize(_userModel->GetModel());
+        _userModel->GetRenderer<Rendering::CubismRenderer_Metal>()->Initialize(_userModel->GetModel());
         
         if (strcmp(_modelSetting->GetPhysicsFileName(), "") != 0)
         {
@@ -144,12 +144,12 @@ static Allocator _allocator;
     return [url lastPathComponent];
 }
 
-- (void)setTexture:(int)textureNo to:(uint32_t)openGLTextureNo {
-    _userModel->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->BindTexture(textureNo, openGLTextureNo);
+- (void)setTexture:(uint32_t)textureNo textureId:(id<MTLTexture>)textureId {
+    _userModel->GetRenderer<Rendering::CubismRenderer_Metal>()->BindTexture(textureNo, textureId);
 }
 
 - (void)setPremultipliedAlpha:(bool)enable {
-    _userModel->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->IsPremultipliedAlpha(enable);
+    _userModel->GetRenderer<Rendering::CubismRenderer_Metal>()->IsPremultipliedAlpha(enable);
 }
 
 - (float)getCanvasWidth {
@@ -165,7 +165,7 @@ static Allocator _allocator;
     };
     const auto cMatrix = new CubismMatrix44();
     cMatrix->SetMatrix(fMatrix);
-    _userModel->GetRenderer<Live2D::Cubism::Framework::Rendering::CubismRenderer_OpenGLES2>()->SetMvpMatrix(cMatrix);
+    _userModel->GetRenderer<Live2D::Cubism::Framework::Rendering::CubismRenderer_Metal>()->SetMvpMatrix(cMatrix);
 }
 
 - (void)setParam:(NSString *)paramId value:(Float32)value {
@@ -187,6 +187,6 @@ static Allocator _allocator;
 }
 
 - (void)draw {
-    _userModel->GetRenderer<Live2D::Cubism::Framework::Rendering::CubismRenderer_OpenGLES2>()->DrawModel();
+    _userModel->GetRenderer<Live2D::Cubism::Framework::Rendering::CubismRenderer_Metal>()->DrawModel();
 }
 @end

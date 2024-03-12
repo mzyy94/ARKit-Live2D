@@ -18,7 +18,7 @@ import SceneKit
 class ContentUpdater: NSObject, ARSCNViewDelegate {
     // MARK: - Properties
 
-    var live2DModel: Live2DModelOpenGL!
+    var live2DModel: Live2DModelMetal!
 
     // MARK: - ARSCNViewDelegate
 
